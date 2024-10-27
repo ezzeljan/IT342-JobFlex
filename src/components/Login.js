@@ -12,13 +12,15 @@ import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
+import Background from './Background';
 import './Register.css';
 
 function Login() {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const navigate = useNavigate(); // Hook for navigation
+    const navigate = useNavigate(); 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -47,7 +49,7 @@ function Login() {
             return;
         }
 
-        // Create user object to send to the API
+        
         const user = {
             email: email,
             password: password
@@ -66,10 +68,10 @@ function Login() {
                 throw new Error("Invalid email or password");
             }
 
-            // Assuming the response contains a success message or user info
+            
             const result = await response.json();
             alert("Login successful!");
-            // Redirect to the homepage
+            
             navigate("/homepage");
         } catch (err) {
             setErrorMessage(err.message);
@@ -80,36 +82,8 @@ function Login() {
 
   return (
     <Container component="main" maxWidth="xs" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", paddingBottom: "100px"  }}>
-      <Typography
-        variant="h4"
-        sx={{
-          position: "absolute",
-          top: 20,
-          left: 20,
-          fontWeight: 'bold',
-          color: "#28313B"
-        }}
-      >
-        TrabaHanap
-      </Typography>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 502 532" fill="none" style={{ position: 'absolute', bottom: 0, left: 0, width: 502, height: 532 }}>
-        <path d="M501.5 540.148C501.5 678.22 288.071 643.564 150 643.564C11.9288 643.564 -100 531.635 -100 393.564C-100 255.493 -68.463 -186.851 28.4999 88.564C75.5 222.064 181 517.148 501.5 540.148Z" fill="url(#paint0_linear_38_102)" fill-opacity="0.58"/>
-        <defs>
-          <linearGradient id="paint0_linear_38_102" x1="200.75" y1="0" x2="200.75" y2="647.435" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#FF6B6B"/>
-            <stop offset="1" stop-color="#FFBE5B"/>
-          </linearGradient>
-        </defs>
-      </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 502 532" fill="none" style={{ position: 'absolute', top: 0, right: 0, transform: 'rotate(180deg)', width: 502, height: 532 }}>
-        <path d="M501.5 540.148C501.5 678.22 288.071 643.564 150 643.564C11.9288 643.564 -100 531.635 -100 393.564C-100 255.493 -68.463 -186.851 28.4999 88.564C75.5 222.064 181 517.148 501.5 540.148Z" fill="url(#paint1_linear_38_102)" fill-opacity="0.58"/>
-        <defs>
-          <linearGradient id="paint1_linear_38_102" x1="200.75" y1="0" x2="200.75" y2="647.435" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#FF6B6B"/>
-            <stop offset="1" stop-color="#FFBE5B"/>
-          </linearGradient>
-        </defs>
-      </svg>
+      <Navbar />
+      <Background/>
       <Box
         sx={{
           marginTop: 8,
@@ -209,7 +183,7 @@ function Login() {
           </Button>
           <Grid container justifyContent="center">
             <Grid item>
-              <RouterLink to="/" variant="body2" style={{ textDecoration: 'none'}}>
+            <RouterLink to="/register" variant="body2" style={{ textDecoration: 'none'}}>
                 {"Don't have an account? Sign Up"}
               </RouterLink>
             </Grid>
