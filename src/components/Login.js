@@ -81,16 +81,16 @@ function Login() {
 
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", paddingBottom: "100px"  }}>
-      <Navbar />
+    <Container component="main" maxWidth="xs" className="main-container" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", paddingBottom: "100px"  }}>
+      <Navbar className="navbar"/>
       <Background/>
-      <Box
+      <Box className="login-box"
         sx={{
           marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "25px"
+          gap: "20px"
         }}
       >
         <Typography component="h1" variant="h5" sx={{ fontSize: "32px", fontFamily: "Arial", fontWeight: "600", color: "#28313B"}}>

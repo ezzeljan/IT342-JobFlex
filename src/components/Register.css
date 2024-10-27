@@ -5,3 +5,22 @@ svg {
     fill: linear-gradient(180deg, rgba(255, 107, 107, 0.58) 0%, rgba(255, 190, 91, 0.58) 100%);
 
 }
+
+  
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+  }
+  
+  .main-container {
+    padding-top: 80px; 
+  }
+  
+  .login-box {
+    position: relative;
+    z-index: 5;
+    margin-top: 20px;
+  }

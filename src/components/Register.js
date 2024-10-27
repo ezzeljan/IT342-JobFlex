@@ -23,7 +23,7 @@ function Register() {
         const data = new FormData(event.currentTarget);
         const email = data.get("email");
         const password = data.get("password");
-        const confirmPassword = data.get("confirmpassword"); // Ensure the name matches the TextField
+        const confirmPassword = data.get("confirmpassword"); 
 
         let isValid = true;
 
@@ -53,7 +53,6 @@ function Register() {
           return;
         }
 
-        // Create user object to send to the API
         const user = {
             email: email,
             password: password
@@ -74,14 +73,14 @@ function Register() {
 
             
             alert("User registered successfully!");
-            // Optionally redirect to login or home page
+  
         } catch (err) {
             alert("Error: " + err.message);
         }
     };
 
     return (
-        <Container component="main" maxWidth="xs" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", paddingBottom: "100px" }}>
+        <Container component="main" maxWidth="xs" className="main-container" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", paddingBottom: "100px" }}>
             <Navbar/>
 
             <Background/>
@@ -92,7 +91,7 @@ function Register() {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap: "25px"
+                    gap: "20px"
                 }}
             >
                 <Typography component="h1" variant="h5" sx={{ fontSize: "32px", fontFamily: "Arial", fontWeight: "600", color: "#28313B" }}>

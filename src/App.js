@@ -4,7 +4,6 @@ import './App.css';
 import Register from './components/Register';
 import Login from './components/Login';
 import HomePage from './components/HomePage';
-import Navbar from './components/Navbar';
 import LandingPage from './components/LandingPage';
 
 function App() {
@@ -13,8 +12,8 @@ function App() {
       <Routes>
       <Route path="/" element={<LandingPage/>} />
       <Route path="/login" element ={<Login/>} />
-      <Route path="/homepage" element ={<HomePage/>} />
       <Route path="/register" element ={<Register/>} />
+      <Route path="/homepage" element ={<HomePage/>} />
       </Routes>
     </Router>
   );
