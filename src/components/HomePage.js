@@ -1,10 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Homenav from './Homenav';
 
 
 function HomePage() {
   return (
-    <h1>HomePage</h1>
+    <div><Homenav />
+    <h1>HomePage</h1></div>
+    
   );
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link as RouterLink } from 'react-router-dom';
 import Navbar from "./Navbar";
-import Logo from "../assets/dogsmile.jpg"
+import Logo from "../assets/B6_5.png.png"
 import "./LandingPage.css";
 
 function LandingPage () {
