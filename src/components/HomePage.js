@@ -1,13 +1,38 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Homenav from './Homenav';
+import React, { useState } from 'react';
+import Navbar from './Navbar';
+import ListProviders from './ListProviders';
+import AddProvider from './AddProvider';
+import Ellipse7 from '../assets/Ellipse 7.svg';
+import './HomePage.css';
 
 
 function HomePage() {
-  return (
-    <div><Homenav />
-    <h1>HomePage</h1></div>
-    
+  const [showAddProviderModal, setShowAddProviderModal] = useState(false);
+ 
+    // Function to open and close the modal
+    const toggleAddProviderModal = () => {
+        setShowAddProviderModal(!showAddProviderModal);
+    };
+ 
+    return (
+        <div className="App">
+            <Navbar />
+ 
+            <div className="heading-container">
+                <h2 className="heading">Service Providers</h2>
+                <button className="toggle-button" onClick={toggleAddProviderModal}>+</button>
+            </div>
+ 
+            <ListProviders />
+ 
+            {showAddProviderModal && (
+                <div className="modal-overlay">
+                    <AddProvider toggleModal={toggleAddProviderModal} />
+                </div>
+            )}
+ 
+            <img src={Ellipse7} alt="Background Ellipse" className="ellipse-bottom-left" />
+        </div>
   );
 }
 

@@ -2,7 +2,8 @@ import axios from 'axios';
 
 class ServiceProviderService {
     getAllProviders() {
-        return axios.get('http://localhost:8080/getAllProviders');
+        return axios.get('http://localhost:8080/getAllProviders')
+        
     }
 
     postProvider(provider) {

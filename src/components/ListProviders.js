@@ -18,6 +18,10 @@ function ListProviders() {
         fetchProviders();
     }, []);
 
+    useEffect(() => {
+        console.log(providers);
+    }, [providers]);
+
     const handleUpdate = (updatedProvider) => {
         setProviders((prevProviders) =>
             prevProviders.map((provider) =>
