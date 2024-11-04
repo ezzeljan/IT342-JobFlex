@@ -10,17 +10,29 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Background from './Background';
 import './Register.css';
+import { IconButton, InputAdornment } from '@mui/material';
 
 function Login() {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [showPassword, setShowPassword] = useState("");
     const navigate = useNavigate(); 
+
+    const handleClickShowPassword = () => {
+      setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+      event.preventDefault();
+  };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -147,13 +159,25 @@ function Login() {
             fullWidth
             name="password"
             label="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             autoComplete="current-password"
             error={!!passwordError}
             helperText={passwordError}
-            
-          />
+            InputProps = {{
+              endAdornment: (
+                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}
+                    />
 
             {errorMessage && (
             <Typography variant="body2" color="error">{errorMessage}</Typography>
