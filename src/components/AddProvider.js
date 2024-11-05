@@ -33,7 +33,7 @@ function AddProvider({ toggleModal }) {
 
             <div className="button-group">
                 <button type="submit">Add Provider</button>
-                <button type="button" className="cancel-button" onClick={toggleModal}>Cancel</button>
+                <button type="button" style ={{backgroundColor:"red"}} className="cancel-button" onClick={toggleModal}>Cancel</button>
             </div>
         </form>
     );
