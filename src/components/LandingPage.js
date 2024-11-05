@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import Navbar from "./Navbar";
 import Logo from "../assets/B6_5.png.png"
 import "./LandingPage.css";
-
+/*push test*/
 function LandingPage () {
     return (
         <div className="home-container">
