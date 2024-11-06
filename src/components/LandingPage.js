@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import './LandingPage.css';
 import jobImage from '../assets/B6_5.png.png';
 import Section2Image from '../assets/section2.png'
-import { FaCalendarAlt, FaStar } from 'react-icons/fa';
+import { FaBell, FaCalendarAlt, FaStar } from 'react-icons/fa';
 import { Link as RouterLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import AOS from 'aos';
@@ -43,7 +43,7 @@ const LandingPage = () => {
 
         <div className="about-container" data-aos="fade-up">
           <div className="about-heading-card about-card">
-            <h2 className="about-heading">About Trabahanap</h2>
+            <h2 className="about-heading">Finding Trusted Local Services Made Easy</h2>
           </div>
           <div className="about-description-card about-card">
           <p id="about-description"> Trabahanap is your go-to platform for booking trusted local services. 
@@ -78,6 +78,15 @@ const LandingPage = () => {
               Ensure quality by checking and reviews 
               before booking. Providers can also benefit
               from feedback to improve and build trust. 
+            </p>
+          </div>
+
+          <div className="service-card">
+            <FaBell className="service-card-icon bell-icon" />
+            <h3 className="service-card-heading">Service Booking Reminders</h3>
+            <p className="service-card-description">
+              Receive timely reminders for upcoming bookings and
+               appointments, helping you manage your schedule.
             </p>
           </div>
         </div>
