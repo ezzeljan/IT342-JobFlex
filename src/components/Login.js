@@ -94,7 +94,7 @@ function Login() {
 
   return (
     <Container component="main" maxWidth="xs" className="main-container" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", paddingBottom: "100px"  }}>
-      <Navbar className="navbar"/>
+
       <Background/>
       <Box className="login-box"
         sx={{

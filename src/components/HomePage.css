@@ -1,6 +1,6 @@
 .App {
     font-family: Arial, sans-serif;
-    margin-top: 100px;
+    /*margin-top: 100px;*/
     background-color: #ffffff;   
 }
 .heading {
@@ -17,7 +17,7 @@
     margin: 20px 0;
 }
  
-/* Add Provider Form */
+
 form {
     background-color: #ffffff;
     padding: 20px;
@@ -69,7 +69,7 @@ button:hover {
     font-size: 0.9rem;
 }
  
-/* Button Container */
+
 .button-container {
     display: flex;
     justify-content: flex-start;
@@ -94,7 +94,7 @@ button:hover {
 .toggle-button:hover {
     background-color: #45a049; 
 }
-/* Modal Overlay */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -108,7 +108,7 @@ button:hover {
     z-index: 1000;
 }
  
-/* Centered Update Form */
+
 .modal-overlay form {
     background-color: #ffffff;
     padding: 20px;
@@ -117,7 +117,7 @@ button:hover {
     max-width: 400px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-/* Button Group */
+
 .button-group {
     display: flex;
     justify-content: space-between;

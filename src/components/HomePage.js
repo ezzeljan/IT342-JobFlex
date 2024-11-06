@@ -16,7 +16,7 @@ function HomePage() {
  
     return (
         <div className="App">
-            <Navbar />
+            <Navbar /> {/*temporary pa ni nga navbar*/}
  
             <div className="heading-container">
                 <h2 className="heading">Service Providers</h2>

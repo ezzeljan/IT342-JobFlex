@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -81,7 +80,6 @@ function Register() {
 
     return (
         <Container component="main" maxWidth="xs" className="main-container" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", paddingBottom: "100px" }}>
-            <Navbar/>
 
             <Background/>
 
