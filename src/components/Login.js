@@ -14,7 +14,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
 import Background from './Background';
 import './Register.css';
 import { IconButton, InputAdornment } from '@mui/material';
@@ -82,6 +81,8 @@ function Login() {
 
             
             const result = await response.json();
+            /*alert("Login successful!");*/localStorage.setItem("user", JSON.stringify(result));
+
             alert("Login successful!");
             
             navigate("/homepage");

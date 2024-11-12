@@ -7,6 +7,7 @@ import HomePage from './components/HomePage';
 import LandingPage from './components/LandingPage';
 import ListProviders from './components/ListProviders';
 import AddProvider from './components/AddProvider';
+import ProfilePage from './components/ProfilePage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/homepage" element ={<HomePage/>} />
       <Route path="/listprovider" element ={<ListProviders/>} />
       <Route path="/addprovider" element ={<AddProvider/>} />
+      <Route path="/profilepage" element ={<ProfilePage/>} />
       </Routes>
     </Router>
   );
