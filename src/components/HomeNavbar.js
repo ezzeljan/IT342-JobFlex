@@ -45,7 +45,7 @@ function HomeNavbar() {
           <FaUserCircle className="navbar-icon" title="Profile" onClick={toggleDropdown} />
           {showDropdown && (
             <div className="dropdown-menu">
-              <RouterLink to="/profile" className="dropdown-item">Profile</RouterLink>
+              <RouterLink to="/profilepage" className="dropdown-item">Profile</RouterLink>
               <button onClick={handleLogout} className="dropdown-item">Logout</button>
             </div>
           )}

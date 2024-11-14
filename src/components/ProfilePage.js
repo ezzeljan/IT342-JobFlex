@@ -59,6 +59,7 @@ function ProfilePage() {
   return (
     <div className="profile-page">
         <Sidebar handleLogout={handleLogout}/>
+        <h1>UNDER CONSTRUCTION!</h1>
       <h2 className="profile-heading">Profile</h2>
       <form className="profile-form" onSubmit={(e) => e.preventDefault()}>
         {/* Name - Editable */}
