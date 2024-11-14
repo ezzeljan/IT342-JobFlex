@@ -29,7 +29,7 @@ function Provider() {
                 </div>
             )}
  
-            <img src={Ellipse7} alt="Background Ellipse" className="ellipse-bottom-left" />
+            
         </div>
   );
 }

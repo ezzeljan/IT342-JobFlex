@@ -110,35 +110,7 @@ function Login() {
           Login
         </Typography>
 
-        <Typography variant="body1" sx={{ textAlign: 'center', mt: "37px", color: "#808080", fontSize: "12px"}}>
-          Log in with
-        </Typography>
-
-        <Box sx={{ display: "flex", justifyContent: "center", gap: "10px"}}>
-          <Button
-            variant="outlined"
-            fullWidth
-            sx={{ 
-              width: '200px',
-              height: '100px'
-
-             }}
-          >
-            <GoogleIcon fontSize="large" />  {/* Google Icon */}
-          </Button>
-          <Button
-            variant="outlined"
-            fullWidth
-            sx={{ width: '200px',
-              height: '100px' }}
-          >
-            <LinkedInIcon fontSize="large" />  {/* LinkedIn Icon */}
-          </Button>
-        </Box>
-
-        <Typography variant="body1" sx={{ textAlign: 'center', color: "#808080", fontSize: "12px" }}>
-          or continue with
-        </Typography>
+        
 
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
-import Provider from './Provider';
-import Sidebar from './SideBar';
+import HomeNavbar from './HomeNavbar';
+import ServiceForm from './ServiceForm';
 
 function HomePage() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
@@ -10,7 +10,7 @@ function HomePage() {
   const [nameInput, setNameInput] = useState("");
 
 
-  const navigate = useNavigate(); // To use navigate for redirection
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user.name) {
@@ -38,31 +38,32 @@ function HomePage() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("user"); // Remove the user from local storage
-    setUser({}); // Clear user state
+    localStorage.removeItem("user");
+    setUser({});
     navigate('/login');
   };
 
+  
 
   return (
     <div className="homepage">
-      
-      <Sidebar handleLogout={handleLogout}/>
-
+      <HomeNavbar handleLogout={handleLogout} />
       <main className="content">
         <div className="info-display-container">
-          <div className="info-header">
-            <h2 className="greeting">Hello, {user.name || "User"}!</h2>
-            <input
-              type="text"
-              placeholder="Search..."
-              className="search-bar"
-            />
+          <div className="greeting">Welcome, {user.name || "User"}!</div>
+          <div className="center-content">
+            <p className="welcome-message">
+              We're here to help you find trusted local services. <br /> or
+            </p>
+            <button className="become-provider-button">Become a Service Provider</button>
           </div>
         </div>
 
         <div className="services-selection-container">
-          <Provider />
+          {/* Content for service selection can go here */}
+          <h2 className="find-services-message">Find services on Trabahanap</h2>
+          <ServiceForm/>
+         
         </div>
       </main>
 

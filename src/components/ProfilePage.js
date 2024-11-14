@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from './SideBar';
+import Sidebar from './HomeNavbar';
 import './ProfilePage.css';
 
 function ProfilePage() {
