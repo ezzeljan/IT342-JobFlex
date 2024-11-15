@@ -20,7 +20,7 @@ function HomeNavbar() {
   return (
     <nav className="nav-bar">
       <div className="navbar-left">
-        <RouterLink to="/" style={{ textDecoration: 'none' }}>
+        <RouterLink to="/homepage" style={{ textDecoration: 'none' }}>
           <div className="navbar-title">TrabaHanap</div>
         </RouterLink>
         <div className="navbar-search-container">
