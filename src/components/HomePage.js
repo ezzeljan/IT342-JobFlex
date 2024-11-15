@@ -8,13 +8,15 @@ function HomePage() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
   const [showNamePrompt, setShowNamePrompt] = useState(false);
   const [nameInput, setNameInput] = useState("");
-
-
+  const [showRolePrompt, setShowRolePrompt] = useState(false);
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!user.name) {
       setShowNamePrompt(true);
+    } else if (!user.role) {
+      setShowRolePrompt(true);
     }
   }, [user]);
 
@@ -32,18 +34,49 @@ function HomePage() {
       localStorage.setItem("user", JSON.stringify(updatedUser));
       setUser(updatedUser);
       setShowNamePrompt(false);
+      setShowRolePrompt(true);
     } catch (err) {
       console.error(err);
     }
   };
+
+  const handleRoleSelection = (selectedRole) => {
+    setRole(selectedRole);
+  };
+
+  //TARUNGON PANI idk how :')
+  const handleSubmitRole = () => {
+    alert(`Role selected: ${role}`);
+    setShowRolePrompt(false);
+  };
+  /*
+  const handleSubmitRole = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/user/update-role`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.userId, role })
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to update role");
+      }
+  
+      const updatedUser = { ...user, role };
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      setUser(updatedUser);
+      setShowRolePrompt(false); // Close role prompt after submission
+    } catch (err) {
+      console.error("Error submitting role:", err); // Catch any errors
+    }
+  };*/
+  
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser({});
     navigate('/login');
   };
-
-  
 
   return (
     <div className="homepage">
@@ -60,10 +93,8 @@ function HomePage() {
         </div>
 
         <div className="services-selection-container">
-          {/* Content for service selection can go here */}
           <h2 className="find-services-message">Find services on Trabahanap</h2>
-          <ServiceForm/>
-         
+          <ServiceForm />
         </div>
       </main>
 
@@ -78,6 +109,36 @@ function HomePage() {
               placeholder="Your name"
             />
             <button onClick={handleSaveName}>Save</button>
+          </div>
+        </div>
+      )}
+
+      {showRolePrompt && (
+        <div className="role-prompt-modal">
+          <div className="role-prompt-content">
+            <h3>What brings you to Trabahanap?</h3>
+            <p>We want to tailor your experience so you'll feel right at home.</p>
+            <div className="role-prompt-buttons">
+              <button
+                onClick={() => handleRoleSelection('Customer')}
+                className={role === 'Customer' ? 'selected' : ''}
+              >
+                <h4>Seeker</h4>
+                <p>You can browse and book local services in your area, from home repairs to personal assistance, all at your convenience.</p>
+              </button>
+              <button
+                onClick={() => handleRoleSelection('Service Provider')}
+                className={role === 'Service Provider' ? 'selected' : ''}
+              >
+                <h4>Provider</h4>
+                <p>You can offer your local expertise, manage bookings, and connect with customers in your community seeking your services.</p>
+              </button>
+            </div>
+            {role && (
+              <button className="submit-button" onClick={handleSubmitRole}>
+                Submit
+              </button>
+            )}
           </div>
         </div>
       )}
