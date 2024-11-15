@@ -1,0 +1,85 @@
+.profile-page {
+    font-family: Arial, sans-serif;
+  }
+  
+  .profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .profile-title {
+    text-align: center;
+  }
+  
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-form-group {
+    margin-bottom: 20px;
+  }
+  
+  .profile-label {
+    font-weight: 500;
+  }
+  
+  .profile-input {
+    padding: 8px;
+    margin-top: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: rgb(215, 215, 215);
+  }
+  
+  .profile-button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .profile.button:hover {
+    background-color: #45a049;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  
+  
+  .profile-button,
+.delete-account-button {
+  width: 100%; /* Make buttons the same width as input fields */
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.profile-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.profile-button:hover {
+  background-color: #45a049;
+}
+
+.delete-account-button {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.delete-account-button:hover {
+  background-color: #d9363e;
+}
+
+  
