@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins';
 }
 
 .content {
@@ -28,9 +28,9 @@
 }
 
 .greeting {
-  font-family: 'Poppins' sans-serif;
+  font-family: 'Poppins';
   font-weight: bold;
-  font-size: 18px;
+  font-size: 30px;
   color: #333;
   position: absolute;
   top: 20px;
@@ -47,25 +47,13 @@
 }
 
 .welcome-message {
-  font-size: 18px;
+  font-size: 20px;
   color: #555;
 }
 
-.become-provider-button {
-  background-color: #09c580;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 10px;
-}
 
-.become-provider-button:hover {
-  background-color: #038e5b;
-}
+
+
 
 .services-selection-container {
   background-color: #ffffff;
@@ -73,8 +61,23 @@
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   flex: 1;
+  margin-top: 50px;
 }
 
+.find-services-message {
+  margin-left: 45px;
+}
+
+
+.info-display-container, .services-selection-container,
+.more-info {
+  margin-right: 7rem;
+  margin-left: 7rem;
+}
+
+
+
+/*Name Prompt*/
 .name-prompt-modal {
   position: fixed;
   top: 0;

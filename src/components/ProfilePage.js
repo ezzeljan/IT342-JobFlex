@@ -11,7 +11,6 @@ function ProfilePage() {
   const [password, setPassword] = useState(user.password || ''); 
   const [isEditingPassword, setIsEditingPassword] = useState(false); 
   const [errors, setErrors] = useState({});
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,12 +32,14 @@ function ProfilePage() {
   const handleSaveChanges = async () => {
     if (!validateForm()) return;
 
+    // Ensure the userType is preserved (don't overwrite it with null)
     const updatedUserDetails = {
       name,
       address,
       phone,
       email: user.email,
       password: isEditingPassword && password.trim() ? password : user.password,
+      userType: user.userType, // Preserve the userType
     };
 
     try {
@@ -144,6 +145,15 @@ function ProfilePage() {
               onChange={(e) => setPassword(e.target.value)}
             />
             {errors.password && <p className="error">{errors.password}</p>}
+          </div>
+          <div className="profile-form-group">
+            <label className="profile-label">Role (User Type)</label>
+            <input
+              className="profile-input"
+              type="text"
+              value={user.userType || ''}
+              readOnly
+            />
           </div>
           <button
             className="profile-button"
