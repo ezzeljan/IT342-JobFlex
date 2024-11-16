@@ -83,9 +83,9 @@ function HomePage() {
           <div className="greeting">Welcome, {user.name || "User"}!</div>
           <div className="center-content">
             <p className="welcome-message">
-              We're here to help you find trusted local services. <br /> or
+              We're here to help you find trusted local services.
             </p>
-            <button className="become-provider-button">Become a Service Provider</button>
+            
           </div>
         </div>
 

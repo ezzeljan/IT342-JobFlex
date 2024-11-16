@@ -51,21 +51,9 @@
   color: #555;
 }
 
-.become-provider-button {
-  background-color: #09c580;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 10px;
-}
 
-.become-provider-button:hover {
-  background-color: #038e5b;
-}
+
+
 
 .services-selection-container {
   background-color: #ffffff;
