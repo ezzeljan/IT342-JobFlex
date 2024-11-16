@@ -36,9 +36,7 @@ function HomeNavbar() {
         <FaEnvelope className="navbar-icon" title="Messages" />
         <FaHeart className="navbar-icon" title="Favorites" />
         <FaBell className="navbar-icon" title="Notifications" />
-        <RouterLink to="" className="post-service-link" style={{ textDecoration: 'none' }}>
-          post a service
-        </RouterLink>
+        
 
         {/* Profile Icon with Dropdown */}
         <div className="profile-icon-container">
