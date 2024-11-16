@@ -60,7 +60,6 @@ function HomePage() {
         </div>
 
         <div className="services-selection-container">
-          {/* Content for service selection can go here */}
           <h2 className="find-services-message">Find services on Trabahanap</h2>
           <ServiceForm/>
          
