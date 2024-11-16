@@ -13,10 +13,11 @@ function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Check if user is logged in, and handle prompts accordingly
     if (!user.name) {
       setShowNamePrompt(true);
-    } else if (!user.role) {
-      setShowRolePrompt(true);
+    } else if (user.userType === null) {
+      setShowRolePrompt(true); // Show role prompt if userType is null
     }
   }, [user]);
 
@@ -34,7 +35,10 @@ function HomePage() {
       localStorage.setItem("user", JSON.stringify(updatedUser));
       setUser(updatedUser);
       setShowNamePrompt(false);
-      setShowRolePrompt(true);
+      // If user has no role, show role prompt
+      if (updatedUser.userType === null) {
+        setShowRolePrompt(true);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -44,33 +48,26 @@ function HomePage() {
     setRole(selectedRole);
   };
 
-  //TARUNGON PANI idk how :')
-  const handleSubmitRole = () => {
-    alert(`Role selected: ${role}`);
-    setShowRolePrompt(false);
-  };
-  /*
   const handleSubmitRole = async () => {
     try {
       const response = await fetch(`http://localhost:8080/user/update-role`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: user.userId, role })
+        body: JSON.stringify({ userId: user.userId, userType: role })
       });
-  
+
       if (!response.ok) {
         throw new Error("Failed to update role");
       }
-  
-      const updatedUser = { ...user, role };
+
+      const updatedUser = { ...user, userType: role };
       localStorage.setItem("user", JSON.stringify(updatedUser));
       setUser(updatedUser);
       setShowRolePrompt(false); // Close role prompt after submission
     } catch (err) {
-      console.error("Error submitting role:", err); // Catch any errors
+      console.error("Error submitting role:", err);
     }
-  };*/
-  
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("user");
