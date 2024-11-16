@@ -54,12 +54,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px 0; /* Adds space around the image */
+    margin: 20px 0;
 }
 
 .image-container img {
-    max-width: 100%; /* Ensures the image does not exceed container width */
-    height: auto; /* Maintains the aspect ratio */
+    max-width: 100%;
+    height: auto; 
 }
 
 .content .add-service {
@@ -76,8 +76,13 @@
     transition: background-color 0.3s ease;
 }
 
+.content .add-service:hover {
+  background-color: #0056b3;
+}
+
 .add-service {
   display: block;
-  margin: 20px auto; /* Adjust margin as needed */
+  margin: 20px auto;
+  
 }
 

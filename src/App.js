@@ -21,7 +21,7 @@ function App() {
       <Route path="/listprovider" element ={<ListProviders/>} />
       <Route path="/addprovider" element ={<AddProvider/>} />
       <Route path="/profilepage" element ={<ProfilePage/>} />
-      <Route path="/provider" element ={<ProviderHomepage/>} />
+      <Route path="/providerhome" element ={<ProviderHomepage/>} />
       </Routes>
     </Router>
   );

@@ -13,13 +13,18 @@ function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is logged in, and handle prompts accordingly
     if (!user.name) {
       setShowNamePrompt(true);
     } else if (user.userType === null) {
-      setShowRolePrompt(true); // Show role prompt if userType is null
+      setShowRolePrompt(true);
+    } else {
+      if (user.userType === 'Customer') {
+        navigate('/homepage');
+      } else if (user.userType === 'Service Provider') {
+        navigate('/providerhome');
+      }
     }
-  }, [user]);
+  }, [user, navigate]);
 
   const handleSaveName = async () => {
     try {
@@ -35,9 +40,14 @@ function HomePage() {
       localStorage.setItem("user", JSON.stringify(updatedUser));
       setUser(updatedUser);
       setShowNamePrompt(false);
-      // If user has no role, show role prompt
       if (updatedUser.userType === null) {
         setShowRolePrompt(true);
+      } else {
+        if (updatedUser.userType === 'Customer') {
+          navigate('/homepage');
+        } else if (updatedUser.userType === 'Service Provider') {
+          navigate('/providerhome');
+        }
       }
     } catch (err) {
       console.error(err);
@@ -63,7 +73,13 @@ function HomePage() {
       const updatedUser = { ...user, userType: role };
       localStorage.setItem("user", JSON.stringify(updatedUser));
       setUser(updatedUser);
-      setShowRolePrompt(false); // Close role prompt after submission
+      setShowRolePrompt(false);
+
+      if (role === 'Customer') {
+        navigate('/homepage');
+      } else if (role === 'Service Provider') {
+        navigate('/providerhome');
+      }
     } catch (err) {
       console.error("Error submitting role:", err);
     }
@@ -85,7 +101,6 @@ function HomePage() {
             <p className="welcome-message">
               We're here to help you find trusted local services.
             </p>
-            
           </div>
         </div>
 
