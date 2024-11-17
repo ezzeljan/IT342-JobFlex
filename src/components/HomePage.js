@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import HomeNavbar from './HomeNavbar';
-import ServiceForm from './ServiceForm';
+import ServiceForm from './ServiceList';
 
 function HomePage() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});

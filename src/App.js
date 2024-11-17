@@ -9,7 +9,7 @@ import ListProviders from './components/ListProviders';
 import AddProvider from './components/AddProvider';
 import ProfilePage from './components/ProfilePage';
 import ProviderHomepage from './components/ProviderHomepage';
-
+import ServiceForm from './components/ServiceForm';
 function App() {
   return (
     <Router>
@@ -22,6 +22,9 @@ function App() {
       <Route path="/addprovider" element ={<AddProvider/>} />
       <Route path="/profilepage" element ={<ProfilePage/>} />
       <Route path="/providerhome" element ={<ProviderHomepage/>} />
+      <Route path="/serviceform" element ={<ServiceForm/>} />
+      
+
       </Routes>
     </Router>
   );

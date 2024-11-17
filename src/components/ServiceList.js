@@ -17,16 +17,64 @@ const ServiceList = () => {
         }
     };
 
+    // Inline styles
+    const styles = {
+        container: {
+            margin: '20px',
+        },
+        list: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '20px',
+        },
+        box: {
+            border: '1px solid #ccc',
+            borderRadius: '8px',
+            padding: '15px',
+            backgroundColor: '#f9f9f9',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+            textAlign: 'center', // Center align the text
+        },
+        boxHover: {
+            transform: 'translateY(-5px)',
+            boxShadow: '0 6px 10px rgba(0, 0, 0, 0.15)',
+        },
+        title: {
+            marginTop: 0,
+            fontSize: '1.5em',
+            fontWeight: 'bold',
+            textAlign: 'center', // Ensure the title is centered
+        },
+        paragraph: {
+            margin: '5px 0',
+            fontSize: '1em',
+        },
+    };
+
     return (
-        <div>
+        <div style={styles.container}>
             <h2>Service List</h2>
-            <ul>
+            <div style={styles.list}>
                 {services.map((service) => (
-                    <li key={service.id}>
-                        {service.title} - ${service.price}
-                    </li>
+                    <div
+                        key={service.id}
+                        style={styles.box}
+                        onMouseOver={(e) => {
+                            e.currentTarget.style.transform = styles.boxHover.transform;
+                            e.currentTarget.style.boxShadow = styles.boxHover.boxShadow;
+                        }}
+                        onMouseOut={(e) => {
+                            e.currentTarget.style.transform = 'none';
+                            e.currentTarget.style.boxShadow = styles.box.boxShadow;
+                        }}
+                    >
+                        <h3 style={styles.title}>{service.title}</h3>
+                        <p style={styles.paragraph}>Price: ${service.price}</p>
+                        <p style={styles.paragraph}>Description: {service.description}</p>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };
