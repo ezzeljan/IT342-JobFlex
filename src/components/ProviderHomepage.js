@@ -8,6 +8,8 @@ function ProviderHomePage() {
     const navigate = useNavigate();
     const [user, setUser] = useState({});
 
+    
+
     const handleLogout = () => {
         localStorage.removeItem("user");
         setUser({});

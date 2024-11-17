@@ -8,8 +8,6 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import GoogleIcon from '@mui/icons-material/Google';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link as RouterLink } from 'react-router-dom';
@@ -17,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import Background from './Background';
 import './Register.css';
 import { IconButton, InputAdornment } from '@mui/material';
+import Navbar from './Navbar';
 
 function Login() {
     const [emailError, setEmailError] = useState("");
@@ -94,7 +93,9 @@ function Login() {
 
 
   return (
-    <Container component="main" maxWidth="xs" className="main-container" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", paddingBottom: "100px"  }}>
+    <div className="login-page">
+      <Navbar />
+    <Container component="main" maxWidth="xs" className="main-container" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "90vh", paddingBottom: "100px"  }}>
 
       <Background/>
       <Box className="login-box"
@@ -188,6 +189,7 @@ function Login() {
         </Box>
       </Box>
     </Container>
+    </div>
   );
 }
 
