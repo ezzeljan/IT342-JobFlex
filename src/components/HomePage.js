@@ -106,7 +106,6 @@ function HomePage() {
 
         <div className="services-selection-container">
           <h2 className="find-services-message">Find services on Trabahanap</h2>
-          <ServiceForm />
         </div>
       </main>
 

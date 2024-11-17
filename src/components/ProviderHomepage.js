@@ -3,10 +3,13 @@ import './ProviderHomepage.css';
 import { useNavigate } from 'react-router-dom';
 import HomeNavbar from './HomeNavbar';
 import beagleImage from '../assets/beagle.png';
+import ServiceList from './ServiceList';
+import axios from 'axios';
 
 function ProviderHomePage() {
     const navigate = useNavigate();
     const [user, setUser] = useState({});
+    const [services, setServices] = useState([]);
 
     // Load user info from localStorage when the component mounts
     useEffect(() => {
@@ -19,6 +22,21 @@ function ProviderHomePage() {
         setUser({});
         navigate('/login');
     };
+    const fetchServices = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/services');
+            setServices(response.data);
+        } catch (error) {
+            console.error('Error fetching services:', error);
+        }
+    };
+
+    const handleAddServiceClick = () => {
+        // Navigate to the ServiceForm route
+        navigate('/serviceform');
+    };
+
+
 
     return (
         <div className="homepage">
@@ -29,17 +47,25 @@ function ProviderHomePage() {
                     <div className="greeting">Welcome, {user.name || "User"}!</div>
                 </div>
                 <h2>My services</h2>
-                <div className="image-container" style={{ textAlign: 'center' }}>
-                    <img src={beagleImage} alt="Beagle sitting" />
-                </div>
-                {/* Show personalized message for providers */}
-                {user.role === "provider" ? (
-                    <p>Hi {user.name || "User"}! You haven't posted any services yet.</p>
+                {services.length > 0 ? (
+                    <ServiceList />
                 ) : (
-                    <p>Hi {user.name || "User"}! You haven't posted any services yet.</p>
+                    <div className="service-group" style={{ textAlign: 'center' }}>
+                        <div className="image-container">
+                            <img src={beagleImage} alt="Beagle sitting" />
+                        </div>
+                        <p>Hi {user.name || "User"}! you haven’t posted any service yet.</p>
+                        <button 
+                            className="add-service" 
+                            style={{ display: 'block', margin: '0 auto' }} 
+                            onClick={handleAddServiceClick}
+                        >
+                            Add a Service
+                        </button>
+                    </div>
                 )}
-                <button className="add-service" style={{ display: 'block', margin: '0 auto' }}>Add a Service</button>
             </main>
+
         </div>
     );
 }

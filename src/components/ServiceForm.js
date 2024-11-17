@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom"; 
 const ServiceForm = () => {
+  const navigate = useNavigate(); 
   const [service, setService] = useState({
     title: "",
     type: "",
@@ -172,15 +173,7 @@ const ServiceForm = () => {
         >
           <button
             type="button"
-            onClick={() =>
-              setService({
-                title: "",
-                type: "",
-                description: "",
-                price: "",
-                availability: "",
-              })
-            }
+            onClick={() => navigate('/providerhome')}  // Navigate to homepage when Cancel is clicked
             style={{
               background: "#ccc",
               color: "#fff",
