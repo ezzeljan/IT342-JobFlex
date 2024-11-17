@@ -47,7 +47,10 @@ function ProviderHomePage() {
                 <div className="info-display-container">
                     <div className="greeting">Welcome, {user.name || "User"}!</div>
                 </div>
-                <div className="services-header">
+                
+                {services.length > 0 ? (
+                    <div className="services-selection-container">
+                        <div className="services-header">
                     <h2>My services</h2>
                     <button 
                         className="addservice" 
@@ -55,9 +58,7 @@ function ProviderHomePage() {
                     >
                         Add a Service
                     </button>
-                </div>
-                {services.length > 0 ? (
-                    <div className="services-selection-container">
+                    </div>
                         <ServiceList services={services} /> 
                     </div>
                 ) : (
