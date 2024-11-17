@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import serviceImage from '../assets/Wallpaper.jpg'
 import axios from 'axios';
 
 const ServiceList = () => {
@@ -17,61 +18,120 @@ const ServiceList = () => {
         }
     };
 
-    // Inline styles
+    // Updated inline styles
     const styles = {
         container: {
             margin: '20px',
+            padding: '0 10px',
+            maxWidth: '1200px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+        heading: {
+            fontSize: '2rem',
+            fontWeight: '600',
+            textAlign: 'center',
+            marginBottom: '30px',
+            color: '#333',
         },
         list: {
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
             gap: '20px',
+            justifyItems: 'center', // Center the cards in each column
         },
-        box: {
-            border: '1px solid #ccc',
-            borderRadius: '8px',
-            padding: '15px',
-            backgroundColor: '#f9f9f9',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-            textAlign: 'center', // Center align the text
+        card: {
+            backgroundColor: '#fff',
+            borderRadius: '12px',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            overflow: 'hidden',
+            cursor: 'pointer',
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
         },
-        boxHover: {
-            transform: 'translateY(-5px)',
-            boxShadow: '0 6px 10px rgba(0, 0, 0, 0.15)',
+        cardHover: {
+            transform: 'translateY(-10px)',
+            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)',
+        },
+        image: {
+            width: '100%',
+            height: '200px',
+            objectFit: 'cover',
+            borderTopLeftRadius: '12px',
+            borderTopRightRadius: '12px',
+        },
+        cardContent: {
+            padding: '20px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            height: '100%',
         },
         title: {
-            marginTop: 0,
-            fontSize: '1.5em',
-            fontWeight: 'bold',
-            textAlign: 'center', // Ensure the title is centered
+            fontSize: '1.3rem',
+            fontWeight: '600',
+            margin: '0',
+            color: '#333',
         },
-        paragraph: {
-            margin: '5px 0',
-            fontSize: '1em',
+        price: {
+            fontSize: '1.1rem',
+            fontWeight: 'bold',
+            color: '#007BFF',
+        },
+        description: {
+            fontSize: '1rem',
+            color: '#666',
+            flexGrow: '1',
+        },
+        button: {
+            backgroundColor: '#007BFF',
+            color: 'white',
+            border: 'none',
+            padding: '10px 15px',
+            borderRadius: '8px',
+            textAlign: 'center',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s ease',
+            fontWeight: '500',
+        },
+        buttonHover: {
+            backgroundColor: '#0056b3',
         },
     };
 
     return (
         <div style={styles.container}>
-            <h2>Service List</h2>
+            <h2 style={styles.heading}>Browse Services</h2>
             <div style={styles.list}>
                 {services.map((service) => (
                     <div
                         key={service.id}
-                        style={styles.box}
+                        style={styles.card}
                         onMouseOver={(e) => {
-                            e.currentTarget.style.transform = styles.boxHover.transform;
-                            e.currentTarget.style.boxShadow = styles.boxHover.boxShadow;
+                            e.currentTarget.style.transform = styles.cardHover.transform;
+                            e.currentTarget.style.boxShadow = styles.cardHover.boxShadow;
                         }}
                         onMouseOut={(e) => {
                             e.currentTarget.style.transform = 'none';
-                            e.currentTarget.style.boxShadow = styles.box.boxShadow;
+                            e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
                         }}
                     >
-                        <h3 style={styles.title}>{service.title}</h3>
-                        <p style={styles.paragraph}>Price: ${service.price}</p>
-                        <p style={styles.paragraph}>Description: {service.description}</p>
+                        <img src={service.imageUrl || serviceImage} alt={service.title} style={styles.image} />
+                        <div style={styles.cardContent}>
+                            <h3 style={styles.title}>{service.title}</h3>
+                            <p style={styles.price}>${service.price}</p>
+                            <p style={styles.description}>{service.description}</p>
+                            <button
+                                style={styles.button}
+                                onMouseOver={(e) => e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor}
+                                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007BFF'}
+                            >
+                                Book Now
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>

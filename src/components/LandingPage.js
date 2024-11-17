@@ -20,7 +20,7 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <Navbar />
-      <section className="main-section">
+      <section className="main-section" id="home">
         <div className="text-container" data-aos="fade-up">
           <h1 className="main-heading">Connect with Local Services Instantly</h1>
           <p className="description">Trabahanap connects you with trusted local service providers for <br/>quick
@@ -35,7 +35,7 @@ const LandingPage = () => {
         </div>
       </section>
       
-      <section className="about-section">
+      <section className="about-section" id="about">
 
         <div className="about-image" data-aos="fade-right">
           <img src={Section2Image} alt="section-image"/>
@@ -56,7 +56,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="services-section">
+      <section className="services-section" id="services">
         <h2 className="services-heading">Our Services</h2>
         <p className="services-heading-description" style={{color: '#767676'}}>Discover a variety of trusted local 
           services tailored to your needs, all easily accessible and bookable through our platform.</p>

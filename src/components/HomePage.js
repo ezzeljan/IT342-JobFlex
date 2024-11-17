@@ -3,6 +3,7 @@ import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import HomeNavbar from './HomeNavbar';
 import ServiceForm from './ServiceList';
+import ServiceList from './ServiceList';
 
 function HomePage() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
@@ -106,6 +107,7 @@ function HomePage() {
 
         <div className="services-selection-container">
           <h2 className="find-services-message">Find services on Trabahanap</h2>
+          <ServiceList/>
         </div>
       </main>
 

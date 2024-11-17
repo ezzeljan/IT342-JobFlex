@@ -10,6 +10,7 @@ import AddProvider from './components/AddProvider';
 import ProfilePage from './components/ProfilePage';
 import ProviderHomepage from './components/ProviderHomepage';
 import ServiceForm from './components/ServiceForm';
+import ServiceList from './components/ServiceList';
 function App() {
   return (
     <Router>
@@ -23,7 +24,7 @@ function App() {
       <Route path="/profilepage" element ={<ProfilePage/>} />
       <Route path="/providerhome" element ={<ProviderHomepage/>} />
       <Route path="/serviceform" element ={<ServiceForm/>} />
-      
+      <Route path="/servicelist" element ={<ServiceList/>} />
 
       </Routes>
     </Router>
