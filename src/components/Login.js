@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -157,14 +155,9 @@ function Login() {
             <Typography variant="body2" color="error">{errorMessage}</Typography>
             )}
           
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-            </Grid>
-            <Grid item>
+          <Grid container alignItems="center" justifyContent="flex-end">
+            
+            <Grid item >
               <Link href="#" variant="body2">
                 Forgot password?
               </Link>

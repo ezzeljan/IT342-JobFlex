@@ -20,6 +20,7 @@ function Register() {
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [emailTakenError, setEmailTakenError] = useState("");
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleClickShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
@@ -38,9 +39,28 @@ function Register() {
         if (!email) {
             setEmailError("Email is required");
             isValid = false;
+        } else if (!email.includes('@')) {
+            setEmailError("Invalid Email, must contain '@'");
+            isValid = false;
         } else {
             setEmailError("");
         }
+
+        //To check if unique ang email unta
+        /*if (isValid) {
+            try {
+                const emailResponse = await fetch(`http://localhost:8080/user/check-email?email=${email}`);
+                if (emailResponse.status === 409) { // Conflict: email already in use
+                    setEmailTakenError("Email is already taken");
+                    isValid = false;
+                } else if (emailResponse.status === 200) {
+                    setEmailTakenError(""); // Email available
+                }
+            } catch (err) {
+                alert("Error checking email availability");
+                isValid = false;
+            }
+        }*/
 
         if (!password) {
             setPasswordError("Password is required");
