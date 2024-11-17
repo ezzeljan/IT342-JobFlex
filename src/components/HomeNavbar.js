@@ -44,6 +44,7 @@ function HomeNavbar() {
           {showDropdown && (
             <div className="dropdown-menu">
               <RouterLink to="/profilepage" className="dropdown-item">Profile</RouterLink>
+              <RouterLink to="/mybooking" className="dropdown-item">My Booking</RouterLink>
               <button onClick={handleLogout} className="dropdown-item">Logout</button>
             </div>
           )}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import serviceImage from '../assets/Wallpaper.jpg'
+import serviceImage from '../assets/Wallpaper.jpg';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const ServiceList = () => {
     const [services, setServices] = useState([]);
@@ -18,7 +19,6 @@ const ServiceList = () => {
         }
     };
 
-    // Updated inline styles
     const styles = {
         container: {
             margin: '20px',
@@ -108,7 +108,7 @@ const ServiceList = () => {
             <div style={styles.list}>
                 {services.map((service) => (
                     <div
-                        key={service.id}
+                        key={service.id || service.title}  // Using service.id or fallback to service.title for unique key
                         style={styles.card}
                         onMouseOver={(e) => {
                             e.currentTarget.style.transform = styles.cardHover.transform;
@@ -124,13 +124,19 @@ const ServiceList = () => {
                             <h3 style={styles.title}>{service.title}</h3>
                             <p style={styles.price}>${service.price}</p>
                             <p style={styles.description}>{service.description}</p>
-                            <button
-                                style={styles.button}
-                                onMouseOver={(e) => e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor}
-                                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007BFF'}
-                            >
-                                Book Now
-                            </button>
+                            <Link
+                                    to={{
+                                        pathname: `/booking/${service.id}`,
+                                        state: {
+                                            title: service.title,
+                                            description: service.description,
+                                            price: service.price,
+                                        },
+                                    }}
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    <button style={styles.button}>Book Now</button>
+                                </Link>
                         </div>
                     </div>
                 ))}
