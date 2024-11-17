@@ -46,6 +46,7 @@ function ProviderHomePage() {
                     {/* Always display the user's name, but tailor the message */}
                     <div className="greeting">Welcome, {user.name || "User"}!</div>
                 </div>
+                <div className="services-view-container">
                 <h2>My services</h2>
                 {services.length > 0 ? (
                     <ServiceList />
@@ -64,6 +65,7 @@ function ProviderHomePage() {
                         </button>
                     </div>
                 )}
+                </div>
             </main>
 
         </div>
