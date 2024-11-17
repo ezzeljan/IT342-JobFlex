@@ -86,3 +86,34 @@
   
 }
 
+.services-selection-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  margin-top: 50px;
+}
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addservice {
+  margin-left: 10px; /* Add some space between the title and the button */
+  padding: 8px 16px; /* Adjust padding as needed */
+  font-size: 16px;
+  background-color: #007bff; /* Button background color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 164px;
+  height: 44px;
+  border-radius: 5px; 
+  transition: background-color 0.3s ease;
+}
+
+.addservice:hover {
+  background-color: #0056b3; /* Button hover effect */
+}
