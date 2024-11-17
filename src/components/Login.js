@@ -157,11 +157,7 @@ function Login() {
           
           <Grid container alignItems="center" justifyContent="flex-end">
             
-            <Grid item >
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
+            
           </Grid>
   
           <Button
