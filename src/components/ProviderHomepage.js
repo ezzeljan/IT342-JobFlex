@@ -36,7 +36,7 @@ function ProviderHomePage() {
                 {user.role === "provider" ? (
                     <p>Hi {user.name || "User"}! You haven't posted any services yet.</p>
                 ) : (
-                    <p>Hi {user.name || "User"}! Browse through our provider services.</p>
+                    <p>Hi {user.name || "User"}! You haven't posted any services yet.</p>
                 )}
                 <button className="add-service" style={{ display: 'block', margin: '0 auto' }}>Add a Service</button>
             </main>
