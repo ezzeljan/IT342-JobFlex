@@ -104,7 +104,6 @@ const ServiceList = () => {
 
     return (
         <div style={styles.container}>
-            <h2 style={styles.heading}>Browse Services</h2>
             <div style={styles.list}>
                 {services.map((service) => (
                     <div
