@@ -38,7 +38,7 @@ const MyBooking = () => {
       <HomeNavbar />
 
       <div>
-        <h2>My Bookings</h2>
+        <h2 className="mybooking-header">My Bookings</h2>
       </div>
       <div className="booking-container">
         <div className="booking-table">
