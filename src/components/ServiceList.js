@@ -3,7 +3,7 @@ import serviceImage from '../assets/Wallpaper.jpg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const ServiceList = ({ searchQuery }) => {
+const ServiceList = ({ searchQuery = ""}) => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
@@ -19,9 +19,10 @@ const ServiceList = ({ searchQuery }) => {
         }
     };
 
-    const filteredServices = services.filter(service => 
-        service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        service.description.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredServices = services.filter(
+        (service) =>
+            (service.title?.toLowerCase().includes(searchQuery.toLowerCase())) ||
+            (service.description?.toLowerCase().includes(searchQuery.toLowerCase()))
     );
 
     const styles = {

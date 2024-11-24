@@ -10,6 +10,11 @@ function ProviderHomePage() {
     const navigate = useNavigate();
     const [user, setUser] = useState({});
     const [services, setServices] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const handleSearch = (query) => {
+        setSearchQuery(query);
+    }
 
     // Load user info from localStorage when the component mounts
     useEffect(() => {
@@ -42,7 +47,7 @@ function ProviderHomePage() {
 
     return (
         <div className="homepage">
-            <HomeNavbar handleLogout={handleLogout} />
+            <HomeNavbar handleLogout={handleLogout} handleSearch={handleSearch}/>
             <main className="content">
                 <div className="info-display-container">
                     <div className="greeting">Welcome, {user.name || "User"}!</div>
@@ -59,7 +64,7 @@ function ProviderHomePage() {
                         Add a Service
                     </button>
                     </div>
-                        <ServiceList services={services} /> 
+                        <ServiceList services={services} searchQuery={searchQuery} /> 
                     </div>
                 ) : (
                     <div className="service-group" style={{ textAlign: 'center' }}>
