@@ -3,7 +3,7 @@ import serviceImage from '../assets/Wallpaper.jpg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const ServiceList = () => {
+const ServiceList = ({ searchQuery }) => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
@@ -18,6 +18,11 @@ const ServiceList = () => {
             console.error('Error fetching services:', error);
         }
     };
+
+    const filteredServices = services.filter(service => 
+        service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        service.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     const styles = {
         container: {
@@ -105,7 +110,7 @@ const ServiceList = () => {
     return (
         <div style={styles.container}>
             <div style={styles.list}>
-                {services.map((service) => (
+                {filteredServices.map((service) => (
                     <div
                         key={service.id || service.title}  // Using service.id or fallback to service.title for unique key
                         style={styles.card}

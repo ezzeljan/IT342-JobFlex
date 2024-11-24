@@ -3,13 +3,17 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { FaBell, FaUserCircle, FaEnvelope, FaHeart, FaSearch } from 'react-icons/fa';
 import './HomeNavbar.css';
 
-function HomeNavbar() {
+function HomeNavbar({ handleSearch }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
+
+  const handleInputChange = (e) => {
+    handleSearch(e.target.value);
+  }
 
   const handleLogout = () => {
     // Clear any necessary user data (e.g., from localStorage)
@@ -29,6 +33,7 @@ function HomeNavbar() {
             type="text"
             placeholder="Search..."
             className="navbar-search"
+            onChange={handleInputChange}
           />
         </div>
       </div>

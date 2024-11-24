@@ -11,6 +11,7 @@ function HomePage() {
   const [nameInput, setNameInput] = useState("");
   const [showRolePrompt, setShowRolePrompt] = useState(false);
   const [role, setRole] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -92,9 +93,13 @@ function HomePage() {
     navigate('/login');
   };
 
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  }
+
   return (
     <div className="homepage">
-      <HomeNavbar handleLogout={handleLogout} />
+      <HomeNavbar handleLogout={handleLogout} handleSearch={handleSearch}/>
       <main className="content">
         <div className="info-display-container">
           <div className="greeting">Welcome, {user.name || "User"}!</div>
@@ -107,7 +112,7 @@ function HomePage() {
 
         <div className="services-selection-container">
           <h2 className="find-services-message">Find services on Trabahanap</h2>
-          <ServiceList/>
+          <ServiceList searchQuery={searchQuery}/>
         </div>
       </main>
 

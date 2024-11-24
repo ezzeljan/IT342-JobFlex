@@ -5,7 +5,8 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Link as RouterLink } from 'react-router-dom';
+import Modal from '@mui/material/Modal';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
@@ -20,6 +21,8 @@ function Register() {
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [openModal, setOpenModal] = useState(false); // State for modal visibility
+    const navigate = useNavigate();
     const [emailTakenError, setEmailTakenError] = useState("");
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -98,12 +101,17 @@ function Register() {
                 throw new Error("Failed to register user");
             }
 
-            alert("User registered successfully!");
+            setOpenModal(true);
   
         } catch (err) {
             alert("Error: " + err.message);
         }
     };
+
+    const handleModalClose = () => {
+        setOpenModal(false);
+        navigate("/login");
+    }
 
     return (
         <div className="register-page">
@@ -205,6 +213,39 @@ function Register() {
                     </Box>
                 </Box>
             </Container>
+
+            <Modal
+                open={openModal}
+                onClose={handleModalClose}
+                aria-labelledby="success-modal-title"
+                aria-describedby="success-modal-description"
+            >
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: 300,
+                        bgcolor: 'background.paper',
+                        borderRadius: '10px',
+                        boxShadow: 24,
+                        p: 4,
+                        textAlign: 'center'
+                    }}
+                >
+                    <Typography id="success-modal-title" variant="h6" component="h2">
+                        Your account has been successfully created!
+                    </Typography>
+                    <Button
+                        onClick={handleModalClose}
+                        variant="contained"
+                        sx={{ mt: 4 }}
+                    >
+                        OK
+                    </Button>
+                </Box>
+            </Modal>
         </div>
     );
 }
