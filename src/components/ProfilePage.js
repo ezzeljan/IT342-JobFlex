@@ -2,15 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ProfilePage.css';
 import HomeNavbar from './HomeNavbar';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  Typography,
+} from '@mui/material';
 
 function ProfilePage() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
   const [name, setName] = useState(user.name || '');
   const [address, setAddress] = useState(user.address || '');
   const [phone, setPhone] = useState(user.phone || '');
-  const [password, setPassword] = useState(user.password || ''); 
-  const [isEditingPassword, setIsEditingPassword] = useState(false); 
+  const [password, setPassword] = useState(user.password || '');
+  const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,14 +42,13 @@ function ProfilePage() {
   const handleSaveChanges = async () => {
     if (!validateForm()) return;
 
-    // Ensure the userType is preserved (don't overwrite it with null)
     const updatedUserDetails = {
       name,
       address,
       phone,
       email: user.email,
       password: isEditingPassword && password.trim() ? password : user.password,
-      userType: user.userType, // Preserve the userType
+      userType: user.userType,
     };
 
     try {
@@ -50,10 +59,10 @@ function ProfilePage() {
       });
 
       if (response.ok) {
-        alert('Profile updated successfully');
         const updatedUser = { ...user, name, address, phone, password: updatedUserDetails.password };
         localStorage.setItem('user', JSON.stringify(updatedUser));
         setUser(updatedUser);
+        setIsUpdateModalOpen(true); // Open the success modal
       } else {
         const errorMessage = await response.text();
         alert('Error: ' + errorMessage);
@@ -65,29 +74,22 @@ function ProfilePage() {
   };
 
   const handleDeleteAccount = async () => {
-    if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-      try {
-        const response = await fetch(`http://localhost:8080/user/deleteUser/${user.userId}`, {
-          method: 'DELETE',
-        });
+    try {
+      const response = await fetch(`http://localhost:8080/user/deleteUser/${user.userId}`, {
+        method: 'DELETE',
+      });
 
-        if (response.ok) {
-          alert('Account deleted successfully');
-          localStorage.removeItem('user');
-          navigate('/login');
-        } else {
-          const errorMessage = await response.text();
-          alert('Error: ' + errorMessage);
-        }
-      } catch (error) {
-        console.error('Error deleting account:', error);
-        alert('Error deleting account');
+      if (response.ok) {
+        localStorage.removeItem('user');
+        setIsDeleteModalOpen(true); // Open the delete modal
+      } else {
+        const errorMessage = await response.text();
+        alert('Error: ' + errorMessage);
       }
+    } catch (error) {
+      console.error('Error deleting account:', error);
+      alert('Error deleting account');
     }
-  };
-
-  const handlePasswordClick = () => {
-    setIsEditingPassword(true);
   };
 
   return (
@@ -96,6 +98,7 @@ function ProfilePage() {
       <div className="profile-container">
         <h2 className="profile-title">Profile</h2>
         <form onSubmit={(e) => e.preventDefault()} className="profile-form">
+          {/* Form Fields */}
           <div className="profile-form-group">
             <label className="profile-label">Name</label>
             <input
@@ -141,7 +144,7 @@ function ProfilePage() {
               className="profile-input"
               type="password"
               value={password}
-              onClick={handlePasswordClick}
+              onClick={() => setIsEditingPassword(true)}
               onChange={(e) => setPassword(e.target.value)}
             />
             {errors.password && <p className="error">{errors.password}</p>}
@@ -165,12 +168,46 @@ function ProfilePage() {
           <button
             className="delete-account-button"
             type="button"
-            onClick={handleDeleteAccount}
+            onClick={() => setIsDeleteModalOpen(true)}
           >
             Delete Account
           </button>
         </form>
       </div>
+
+      {/* Update Modal */}
+      <Dialog open={isUpdateModalOpen} onClose={() => setIsUpdateModalOpen(false)}>
+        <DialogTitle>Update Successful</DialogTitle>
+        <DialogContent>
+          <Typography>Your profile has been updated successfully.</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setIsUpdateModalOpen(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Delete Modal */}
+      <Dialog open={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)}>
+        <DialogTitle>Delete Account</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to delete your account? This action cannot be undone.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setIsDeleteModalOpen(false)}>Cancel</Button>
+          <Button
+            onClick={() => {
+              setIsDeleteModalOpen(false);
+              handleDeleteAccount();
+              navigate('/login'); // Redirect after deletion
+            }}
+            color="error"
+          >
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
