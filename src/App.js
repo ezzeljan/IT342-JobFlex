@@ -14,6 +14,7 @@ import ServiceList from './components/ServiceList';
 import Booking from './components/Booking';
 import MyBooking from './components/MyBooking';
 import BookingServiceProvider from './components/BookingServiceProvider';
+import AddBooking from './components/AddBooking';
 
 function App() {
   return (
@@ -32,7 +33,8 @@ function App() {
         <Route path="/mybooking" element={<MyBooking />} />
         <Route path="/services" element={<ServiceList />} />
         <Route path="/yourbooking" element={<BookingServiceProvider />} />
-        <Route path="/booking/:serviceID" element={<Booking />} /> {/* Corrected */}
+        <Route path="/booking/:serviceID" element={<Booking />} /> 
+        <Route path ="/addbooking" element={<AddBooking/>} />
       </Routes>
     </Router>
   );

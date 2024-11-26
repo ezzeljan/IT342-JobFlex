@@ -1,6 +1,7 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams,Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import HomeNavbar from './HomeNavbar';
 
 const Booking = () => {
     const { serviceID } = useParams(); // Get the service ID from URL
@@ -100,6 +101,9 @@ const Booking = () => {
     }
 
     return (
+        
+    <div>
+            <HomeNavbar />
         <div style={styles.container}>
             <h2 style={styles.title}>{service.title}</h2>
             <p style={styles.description}>{service.description}</p>
@@ -107,6 +111,7 @@ const Booking = () => {
             <p style={styles.availability}>
                 <strong>Availability:</strong> {service.availability ? 'Available' : 'Not Available'}
             </p>
+            <Link to="/addbooking" style={{ textDecoration: 'none' }}>
             <button
                 style={styles.button}
                 onMouseOver={(e) => (e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor)}
@@ -115,6 +120,7 @@ const Booking = () => {
             >
                 Confirm Booking
             </button>
+            </Link>
             <button
                 style={styles.button}
                 onMouseOver={(e) => (e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor)}
@@ -124,6 +130,7 @@ const Booking = () => {
                 Go Back
             </button>
         </div>
+    </div>
     );
 };
 
