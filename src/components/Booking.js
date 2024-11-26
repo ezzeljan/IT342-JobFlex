@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Booking = () => {
-    const { id } = useParams(); // Get the service ID from URL
+    const { serviceID } = useParams(); // Get the service ID from URL
     const navigate = useNavigate();
     const [service, setService] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -12,7 +12,7 @@ const Booking = () => {
     useEffect(() => {
         const fetchServiceDetail = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/services/${id}`);
+                const response = await axios.get(`http://localhost:8080/api/services/${serviceID}`);
                 setService(response.data);
             } catch (error) {
                 setError('Failed to fetch service details.');
@@ -21,11 +21,11 @@ const Booking = () => {
                 setLoading(false);
             }
         };
-        if (id) fetchServiceDetail();
-    }, [id]);
+        if (serviceID) fetchServiceDetail();
+    }, [serviceID]);
 
     const handleBooking = () => {
-        navigate(`/confirm-booking/${id}`);
+        navigate(`/confirm-booking/${serviceID}`);
     };
 
     const handleBack = () => {

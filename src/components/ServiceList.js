@@ -113,7 +113,7 @@ const ServiceList = ({ searchQuery = ""}) => {
             <div style={styles.list}>
                 {filteredServices.map((service) => (
                     <div
-                        key={service.id || service.title}  // Using service.id or fallback to service.title for unique key
+                        key={service.serviceID || service.title}  // Using service.id or fallback to service.title for unique key
                         style={styles.card}
                         onMouseOver={(e) => {
                             e.currentTarget.style.transform = styles.cardHover.transform;
@@ -131,7 +131,7 @@ const ServiceList = ({ searchQuery = ""}) => {
                             <p style={styles.description}>{service.description}</p>
                             <Link
                                     to={{
-                                        pathname: `/booking/${service.id}`,
+                                        pathname: `/booking/${service.serviceID}`,
                                         state: {
                                             title: service.title,
                                             description: service.description,

@@ -32,7 +32,7 @@ function App() {
         <Route path="/mybooking" element={<MyBooking />} />
         <Route path="/services" element={<ServiceList />} />
         <Route path="/yourbooking" element={<BookingServiceProvider />} />
-        <Route path="/booking/:id" element={<Booking />} /> {/* Corrected */}
+        <Route path="/booking/:serviceID" element={<Booking />} /> {/* Corrected */}
       </Routes>
     </Router>
   );
