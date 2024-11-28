@@ -8,7 +8,7 @@ const AddBooking = () => {
     const [booking, setBooking] = useState({
         date: '',
         time: '',
-        status: ''
+        status: 'Pending'
     });
 
     const { date, time, status } = booking;
@@ -24,7 +24,7 @@ const AddBooking = () => {
             console.log('Booking added:', response.data);
 
             alert("Booking added successfully");
-            navigate('/view-booking');
+            navigate('/mybooking');
             // Optionally, you can reset the form fields
             setBooking({ date: '', time: '', status: '' });
         } catch (error) {
@@ -83,11 +83,11 @@ const AddBooking = () => {
                                 onChange={handleInputChange}
                             />
                         </div> */}
-
+                        {/* <Link to='/mybooking' className='btn btn-warning btn-block mt-3'> */}
                         <button type='submit' className='btn btn-primary btn-block'>
                             Add Booking
                         </button>
-
+                        {/* </Link> */}
                         {/* Link to view bookings page */}
                         <Link to='/mybooking' className='btn btn-warning btn-block mt-3'>
                             View Bookings
