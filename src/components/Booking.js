@@ -51,47 +51,46 @@ const Booking = () => {
 
     const handleConfirmBooking = async () => {
         try {
-            const userId = localStorage.getItem('userId'); // Retrieve userId from localStorage
-    
-            if (!userId || userId <= 0) {
-                console.error("Invalid or missing user ID");
-                alert("User is not logged in or user ID is invalid.");
+            // Retrieve and validate userId
+            const userId = parseInt(localStorage.getItem('userId'), 10);
+            if (!userId || isNaN(userId)) {
+                alert('User is not logged in or user ID is invalid.');
+                navigate('/login');
                 return; // Prevent booking if userId is invalid
             }
-
-            // Construct booking payload with service and user info
+    
+            // Validate serviceID
+            const validServiceID = parseInt(serviceID, 10);
+            if (!validServiceID || isNaN(validServiceID)) {
+                alert('Service ID is invalid.');
+                return; // Prevent booking if serviceID is invalid
+            }
+    
+            // Construct booking payload
             const bookingPayload = {
-                serviceEntity: { serviceID: serviceID }, // Send the serviceID correctly
-                userEntity: { userId: userId },  // Add userId to the payload
+                serviceEntity: { serviceID: validServiceID },
+                userEntity: { userId: userId },
                 date: bookingDetails.date,
                 time: bookingDetails.time,
-                status: 'Pending',  // Default status
+                status: 'Pending',
             };
-
-            // Make POST request to backend to store the booking
+    
+            console.log('Booking Payload:', bookingPayload);
+    
+            // POST request to backend
             const response = await axios.post('http://localhost:8080/booking/add', bookingPayload);
-
-            if (response.status === 200) {
+    
+            if (response.status === 200 || response.status === 201) {
                 alert('Booking confirmed successfully!');
-                navigate('/mybooking'); // Navigate to the user's booking page after success
+                navigate('/mybooking'); // Redirect to bookings page
             } else {
                 alert('Failed to confirm booking.');
             }
         } catch (error) {
-            if (error.response) {
-                // Log error details from server response
-                console.error('Error confirming booking:', error.response.data);
-            } else if (error.request) {
-                // Handle when no response is received
-                console.error('Error confirming booking: No response from server', error.request);
-            } else {
-                // Handle other errors (e.g., network error)
-                console.error('Error confirming booking:', error.message);
-            }
-            alert('Failed to confirm booking.');
+            console.error('Error during booking:', error.response || error.message);
+            alert(error.response?.data?.message || 'Failed to confirm booking.');
         }
     };
-
     const styles = {
         container: {
             padding: '20px',
