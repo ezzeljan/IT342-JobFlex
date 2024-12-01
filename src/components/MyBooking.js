@@ -29,8 +29,12 @@ const MyBooking = () => {
   };
 
   const handleDelete = async (bookingID) => {
-    await axios.delete(`http://localhost:8080/booking/delete/${bookingID}`);
-    loadBooking(); // Reload bookings after deletion
+    try {
+      await axios.delete(`http://localhost:8080/booking/delete/${bookingID}`);
+      loadBooking(); // Reload bookings after deletion
+    } catch (error) {
+      console.error("Error deleting booking:", error);
+    }
   };
 
   return (
@@ -61,7 +65,7 @@ const MyBooking = () => {
                 bookings.map((booking) => (
                   <tr key={booking.bookingID}>
                     {/* Accessing the service title from the serviceEntity object */}
-                    <td>{booking.serviceEntity?.title}</td> 
+                    <td>{booking.serviceEntity?.title || "Service Title Not Available"}</td> 
                     <td>{booking.date}</td>
                     <td>{booking.time}</td>
                     <td>{booking.status}</td>

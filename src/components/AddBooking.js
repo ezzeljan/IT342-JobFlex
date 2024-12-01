@@ -8,7 +8,9 @@ const AddBooking = () => {
     const [booking, setBooking] = useState({
         date: '',
         time: '',
-        status: 'Pending'
+        status: 'Pending',
+        serviceID: '',
+        title:'',
     });
 
     const { date, time, status } = booking;
@@ -83,11 +85,11 @@ const AddBooking = () => {
                                 onChange={handleInputChange}
                             />
                         </div> */}
-                        {/* <Link to='/mybooking' className='btn btn-warning btn-block mt-3'> */}
+                        <Link to='/mybooking' className='btn btn-warning btn-block mt-3'>
                         <button type='submit' className='btn btn-primary btn-block'>
                             Add Booking
                         </button>
-                        {/* </Link> */}
+                        </Link>
                         {/* Link to view bookings page */}
                         <Link to='/mybooking' className='btn btn-warning btn-block mt-3'>
                             View Bookings
