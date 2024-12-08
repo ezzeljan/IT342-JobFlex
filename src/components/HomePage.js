@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import HomeNavbar from './HomeNavbar';
-import ServiceForm from './ServiceList';
 import ServiceList from './ServiceList';
 
 function HomePage() {
@@ -99,7 +98,7 @@ function HomePage() {
 
   return (
     <div className="homepage">
-      <HomeNavbar handleLogout={handleLogout} handleSearch={handleSearch}/>
+      <HomeNavbar handleLogout={handleLogout} handleSearch={handleSearch} user={user} />
       <main className="content">
         <div className="info-display-container">
           <div className="greeting">Welcome, {user.name || "User"}!</div>
