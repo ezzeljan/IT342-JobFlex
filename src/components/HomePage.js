@@ -100,8 +100,7 @@ function HomePage() {
 
   return (
     <div className="homepage">
-      <HomeNavbar handleLogout={handleLogout} handleSearch={handleSearch} user={user} />
-      <HomeNavbar handleLogout={handleLogout} handleSearch={handleSearch} userAvatar={userAvatar}/>
+      <HomeNavbar handleLogout={handleLogout} handleSearch={handleSearch} userAvatar={userAvatar} user={user}/>
       <main className="content">
         <div className="info-display-container">
           <div className="greeting">Welcome, {user.name || "User"}!</div>
