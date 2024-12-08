@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { SearchOutlined, FavoriteBorderOutlined, NotificationsOutlined, MailOutline } from '@mui/icons-material';
 import { Avatar } from '@mui/material';
+import { FaEnvelope, FaHeart, FaBell } from 'react-icons/fa';
 import './HomeNavbar.css';
 
 function HomeNavbar({ handleSearch, userAvatar }) {
@@ -48,19 +49,16 @@ function HomeNavbar({ handleSearch, userAvatar }) {
         </div>
       </div>
       <div className="navbar-right">
-<<<<<<< HEAD
         <FaEnvelope className="navbar-icon" title="Messages" />
         <FaHeart className="navbar-icon" title="Favorites" />
         <FaBell className="navbar-icon" title="Notifications" />
         
         {/* Profile Icon with Dropdown */}
-=======
         <MailOutline className="navbar-icon" title="Messages" />
         <FavoriteBorderOutlined className="navbar-icon" title="Favorites" />
         <NotificationsOutlined className="navbar-icon" title="Notifications" />
 
         
->>>>>>> aca618c3a06639a514d847c0bafa1b46e109df76
         <div className="profile-icon-container">
           <Avatar
             src={userAvatar}
