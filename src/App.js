@@ -15,9 +15,12 @@ import Booking from './components/Booking';
 import MyBooking from './components/MyBooking';
 import BookingServiceProvider from './components/BookingServiceProvider';
 import AddBooking from './components/AddBooking';
+import { UserProvider } from './components/UserContext';
 
 function App() {
   return (
+
+    <UserProvider>
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -37,6 +40,9 @@ function App() {
         <Route path ="/addbooking" element={<AddBooking/>} />
       </Routes>
     </Router>
+    </UserProvider>
+
+    
   );
 }
 

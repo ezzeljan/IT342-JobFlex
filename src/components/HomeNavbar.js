@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { FaBell, FaUserCircle, FaEnvelope, FaHeart, FaSearch } from 'react-icons/fa';
+import { SearchOutlined, FavoriteBorderOutlined, NotificationsOutlined, MailOutline } from '@mui/icons-material';
+import { Avatar } from '@mui/material';
 import './HomeNavbar.css';
 
-function HomeNavbar({ handleSearch }) {
+function HomeNavbar({ handleSearch, userAvatar }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
@@ -13,7 +14,7 @@ function HomeNavbar({ handleSearch }) {
 
   const handleInputChange = (e) => {
     handleSearch(e.target.value);
-  }
+  };
 
   const handleLogout = () => {
     // Clear any necessary user data (e.g., from localStorage)
@@ -28,7 +29,7 @@ function HomeNavbar({ handleSearch }) {
           <div className="navbar-title">TrabaHanap</div>
         </RouterLink>
         <div className="navbar-search-container">
-          <FaSearch className="search-icon" />
+          <SearchOutlined className="search-icon" />
           <input
             type="text"
             placeholder="Search..."
@@ -38,14 +39,20 @@ function HomeNavbar({ handleSearch }) {
         </div>
       </div>
       <div className="navbar-right">
-        <FaEnvelope className="navbar-icon" title="Messages" />
-        <FaHeart className="navbar-icon" title="Favorites" />
-        <FaBell className="navbar-icon" title="Notifications" />
-        
+        <MailOutline className="navbar-icon" title="Messages" />
+        <FavoriteBorderOutlined className="navbar-icon" title="Favorites" />
+        <NotificationsOutlined className="navbar-icon" title="Notifications" />
 
-        {/* Profile Icon with Dropdown */}
+        
         <div className="profile-icon-container">
-          <FaUserCircle className="navbar-icon" title="Profile" onClick={toggleDropdown} />
+          <Avatar
+            src={userAvatar}
+            alt="User Avatar"
+            onClick={toggleDropdown}
+            sx={{ cursor: 'pointer', width: 40, height: 40 }}
+          >
+            {!userAvatar ? null : "U"}
+          </Avatar>
           {showDropdown && (
             <div className="dropdown-menu">
               <RouterLink to="/profilepage" className="dropdown-item">Profile</RouterLink>
