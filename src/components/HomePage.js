@@ -27,6 +27,8 @@ function HomePage() {
     }
   }, [user, navigate]);
 
+  const userAvatar = user.profileImage || 'http://localhost:8080/uploads/default-profile.jpg';
+
   const handleSaveName = async () => {
     try {
       const response = await fetch(`http://localhost:8080/user/update-name`, {
@@ -98,7 +100,11 @@ function HomePage() {
 
   return (
     <div className="homepage">
+<<<<<<< HEAD
       <HomeNavbar handleLogout={handleLogout} handleSearch={handleSearch} user={user} />
+=======
+      <HomeNavbar handleLogout={handleLogout} handleSearch={handleSearch} userAvatar={userAvatar}/>
+>>>>>>> aca618c3a06639a514d847c0bafa1b46e109df76
       <main className="content">
         <div className="info-display-container">
           <div className="greeting">Welcome, {user.name || "User"}!</div>

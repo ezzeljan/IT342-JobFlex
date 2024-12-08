@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { FaBell, FaUserCircle, FaEnvelope, FaHeart, FaSearch } from 'react-icons/fa';
+import { SearchOutlined, FavoriteBorderOutlined, NotificationsOutlined, MailOutline } from '@mui/icons-material';
+import { Avatar } from '@mui/material';
 import './HomeNavbar.css';
 
-function HomeNavbar({ handleSearch }) {
+function HomeNavbar({ handleSearch, userAvatar }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [userRole, setUserRole] = useState(null); // State for user role
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function HomeNavbar({ handleSearch }) {
           <div className="navbar-title">TrabaHanap</div>
         </RouterLink>
         <div className="navbar-search-container">
-          <FaSearch className="search-icon" />
+          <SearchOutlined className="search-icon" />
           <input
             type="text"
             placeholder="Search..."
@@ -47,13 +48,28 @@ function HomeNavbar({ handleSearch }) {
         </div>
       </div>
       <div className="navbar-right">
+<<<<<<< HEAD
         <FaEnvelope className="navbar-icon" title="Messages" />
         <FaHeart className="navbar-icon" title="Favorites" />
         <FaBell className="navbar-icon" title="Notifications" />
         
         {/* Profile Icon with Dropdown */}
+=======
+        <MailOutline className="navbar-icon" title="Messages" />
+        <FavoriteBorderOutlined className="navbar-icon" title="Favorites" />
+        <NotificationsOutlined className="navbar-icon" title="Notifications" />
+
+        
+>>>>>>> aca618c3a06639a514d847c0bafa1b46e109df76
         <div className="profile-icon-container">
-          <FaUserCircle className="navbar-icon" title="Profile" onClick={toggleDropdown} />
+          <Avatar
+            src={userAvatar}
+            alt="User Avatar"
+            onClick={toggleDropdown}
+            sx={{ cursor: 'pointer', width: 40, height: 40 }}
+          >
+            {!userAvatar ? null : "U"}
+          </Avatar>
           {showDropdown && (
             <div className="dropdown-menu">
               <RouterLink to="/profilepage" className="dropdown-item">Profile</RouterLink>

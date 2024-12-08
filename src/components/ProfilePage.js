@@ -9,7 +9,10 @@ import {
   DialogActions,
   Button,
   Typography,
+  Avatar,
+  IconButton,
 } from '@mui/material';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 function ProfilePage() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
@@ -17,6 +20,7 @@ function ProfilePage() {
   const [address, setAddress] = useState(user.address || '');
   const [phone, setPhone] = useState(user.phone || '');
   const [password, setPassword] = useState(user.password || '');
+  const [profileImage, setProfileImage] = useState(user.profileImage || null);
   const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
@@ -42,27 +46,33 @@ function ProfilePage() {
   const handleSaveChanges = async () => {
     if (!validateForm()) return;
 
-    const updatedUserDetails = {
-      name,
-      address,
-      phone,
-      email: user.email,
-      password: isEditingPassword && password.trim() ? password : user.password,
-      userType: user.userType,
-    };
+    const formData = new FormData();
+    formData.append('userId', user.userId);
+    formData.append('name', name);
+    formData.append('address', address);
+    formData.append('phone', phone);
+    formData.append('email', user.email);
+    formData.append('password', isEditingPassword && password.trim() ? password : user.password);
+    formData.append('userType', user.userType);
+
+    // Append profile image (if selected)
+    if (profileImage && typeof profileImage === 'string') {
+      formData.append('profileImage', profileImage);
+    } else if (profileImage && profileImage instanceof File) {
+      formData.append('profileImage', profileImage);
+    }
 
     try {
-      const response = await fetch(`http://localhost:8080/user/update-profile?userId=${user.userId}`, {
+      const response = await fetch(`http://localhost:8080/user/update-profile`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedUserDetails),
+        body: formData,
       });
 
       if (response.ok) {
-        const updatedUser = { ...user, name, address, phone, password: updatedUserDetails.password };
+        const updatedUser = { ...user, name, address, phone, password: password.trim() ? password : user.password, profileImage };
         localStorage.setItem('user', JSON.stringify(updatedUser));
         setUser(updatedUser);
-        setIsUpdateModalOpen(true); // Open the success modal
+        setIsUpdateModalOpen(true); 
       } else {
         const errorMessage = await response.text();
         alert('Error: ' + errorMessage);
@@ -73,6 +83,22 @@ function ProfilePage() {
     }
   };
 
+  const handleProfileImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setProfileImage(file); 
+      const newUser = { ...user, profileImage: URL.createObjectURL(file) }; 
+      localStorage.setItem('user', JSON.stringify(newUser));
+    }
+  };
+
+  // Image URL logic
+  const profileImageUrl = profileImage
+  ? profileImage instanceof File
+    ? URL.createObjectURL(profileImage) 
+    : `http://localhost:8080/${profileImage}` 
+  : 'http://localhost:8080/uploads/default-profile.jpg'; 
+
   const handleDeleteAccount = async () => {
     try {
       const response = await fetch(`http://localhost:8080/user/deleteUser/${user.userId}`, {
@@ -81,7 +107,7 @@ function ProfilePage() {
 
       if (response.ok) {
         localStorage.removeItem('user');
-        setIsDeleteModalOpen(true); // Open the delete modal
+        setIsDeleteModalOpen(true); 
       } else {
         const errorMessage = await response.text();
         alert('Error: ' + errorMessage);
@@ -94,10 +120,31 @@ function ProfilePage() {
 
   return (
     <div className="profile-page">
-      <HomeNavbar />
+      <HomeNavbar userAvatar={profileImageUrl}/>
       <div className="profile-container">
         <h2 className="profile-title">Profile</h2>
         <form onSubmit={(e) => e.preventDefault()} className="profile-form">
+          {/* Profile Image Upload */}
+          <div className="profile-image-container">
+            <Avatar 
+              src={profileImageUrl} 
+              alt="Profile" 
+              sx={{ width: 100, height: 100, margin: 'auto' }} 
+            />
+            <input 
+              accept="image/*" 
+              style={{ display: 'none' }} 
+              id="upload-profile-image" 
+              type="file" 
+              onChange={handleProfileImageChange} 
+            />
+            <label htmlFor="upload-profile-image">
+              <IconButton component="span">
+                <CameraAltIcon />
+              </IconButton>
+            </label>
+          </div>
+
           {/* Form Fields */}
           <div className="profile-form-group">
             <label className="profile-label">Name</label>
