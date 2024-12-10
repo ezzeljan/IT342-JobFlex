@@ -13,12 +13,9 @@ const Booking = () => {
   // Load bookings from backend
   const loadBooking = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/booking/get", {
-        validateStatus: (status) => status >= 200 && status < 300,
-      });
-
+      const result = await axios.get("http://localhost:8080/booking/get");
       if (result.status === 200) {
-        setBookings(result.data); // Save the data from the backend, including serviceEntity
+        setBookings(result.data);
       } else {
         console.error("Failed to load bookings:", result.status, result.statusText);
       }
@@ -27,16 +24,13 @@ const Booking = () => {
     }
   };
 
-  // Handle booking acceptance by changing status
+  // Handle booking acceptance
   const handleAcceptBooking = async (bookingID) => {
     try {
-      // Update booking status to 'Accepted/Confirmed'
       const updatedBooking = await axios.put(`http://localhost:8080/booking/update/${bookingID}`, {
-        status: 'Accepted', // Or any status you're updating
-    });
-
+        status: 'Accepted',
+      });
       if (updatedBooking.status === 200) {
-        // Update the local state to reflect the status change
         setBookings((prevBookings) =>
           prevBookings.map((booking) =>
             booking.bookingID === bookingID
@@ -50,22 +44,31 @@ const Booking = () => {
     }
   };
 
-  // Handle booking deletion
-  const handleDelete = async (bookingID) => {
+  // Handle booking decline
+  const handleDeclineBooking = async (bookingID) => {
     try {
-      await axios.delete(`http://localhost:8080/booking/delete/${bookingID}`);
-      loadBooking(); // Reload bookings after deletion
+      const updatedBooking = await axios.put(`http://localhost:8080/booking/update/${bookingID}`, {
+        status: 'Declined',
+      });
+      if (updatedBooking.status === 200) {
+        setBookings((prevBookings) =>
+          prevBookings.map((booking) =>
+            booking.bookingID === bookingID
+              ? { ...booking, status: 'Declined' }
+              : booking
+          )
+        );
+      }
     } catch (error) {
-      console.error("Error deleting booking:", error);
+      console.error("Error declining booking:", error);
     }
   };
 
   return (
     <div>
       <HomeNavbar />
-
       <div>
-        <h2 className="mybooking-header">My Bookings - Service Provider</h2>
+        <h2 className="mybooking-header">Your Bookings</h2>
       </div>
       <div className="booking-container">
         <div className="booking-table">
@@ -76,7 +79,7 @@ const Booking = () => {
                 <th>Booking Date</th>
                 <th>Booking Time</th>
                 <th>Booking Status</th>
-                <th colSpan="3">Actions</th>
+                <th colSpan="2">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -87,34 +90,43 @@ const Booking = () => {
               ) : (
                 bookings.map((booking) => (
                   <tr key={booking.bookingID}>
-                    {/* Display the service title */}
                     <td>{booking.serviceEntity?.title || "Service Title Not Available"}</td>
                     <td>{booking.date}</td>
                     <td>{booking.time}</td>
-                    <td>{booking.status}</td>
-                    <td>
-                      <button
-                        className="cancel-button"
-                        onClick={() => {
-                          if (window.confirm("Are you sure you want to accept this booking?")) {
-                            handleAcceptBooking(booking.bookingID);
-                          }
-                        }}
-                      >
-                        Accept Booking
-                      </button>
+                    <td
+                      className={
+                        booking.status === 'Declined' ? 'status-declined' : ''
+                      }
+                    >
+                      {booking.status}
                     </td>
                     <td>
-                      <button
-                        className="cancel-button"
-                        onClick={() => {
-                          if (window.confirm("Are you sure you want to decline this booking?")) {
-                            handleDelete(booking.bookingID);
-                          }
-                        }}
-                      >
-                        Decline Booking
-                      </button>
+                      {booking.status === 'Pending' && (
+                        <button
+                          className="accept-button"
+                          onClick={() => {
+                            if (window.confirm("Are you sure you want to accept this booking?")) {
+                              handleAcceptBooking(booking.bookingID);
+                            }
+                          }}
+                        >
+                          Accept
+                        </button>
+                      )}
+                    </td>
+                    <td>
+                      {booking.status === 'Pending' && (
+                        <button
+                          className="decline-button"
+                          onClick={() => {
+                            if (window.confirm("Are you sure you want to decline this booking?")) {
+                              handleDeclineBooking(booking.bookingID);
+                            }
+                          }}
+                        >
+                          Decline
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))
