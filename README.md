@@ -10,3 +10,10 @@ Hi, I am Ragelo John C. Gare a 3rd year college student currently taking up Bach
 
 
 As an IT student, I'm passionate about technology and continuously exploring ways to improve my skills, both in the academic and practical fields. I’m excited about building a career in IT and contributing to the ever-evolving tech world!
+
+### Member 3
+**Name**: Claire Andrea Saniel
+**Course and Year**: BSIT - 3
+
+**ABOUT ME**
+Hi, I am Claire Andrea S. Saniel a 3rd year college student taking up BS Information Technology in CEBU INSTITUTE OF TECHNOLOGY-UNIVERSITY. I was born and raised in Dumanjug Cebu, In my free time i enjoy riding my motorcyle to travel and playing online games.
