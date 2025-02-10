@@ -1,4 +1,4 @@
-# IT342-JobFlex 💼📃
+# IT342-JobFlex 💼
 ## Product Description
 JobFlex is an interactive job portal where jobseekers can create professional profiles, build resumes, and apply for job openings. JobFlex will also serve employers, enabling them to post job opportunities and manage job applications.
 ## Features
