@@ -1,17 +1,26 @@
-# IT342-JobFlex
+# IT342-JobFlex 💼📃
+## Product Description
+JobFlex is an interactive job portal where job seekers can create professional profiles, build resumes, and apply for job openings. JobFlex will also serve employers, enabling them to post job opportunities and manage job applications.
+## Features
+- 🔎 Advanced job search and filter options
+- 📝 Resume-building tool
+- 📱 Application tracking functionalities
+## Links
+Figma link: https://www.figma.com/design/1bh0SdttEawFVrLCu8CJwn/JobFlex?node-id=0-1&t=PChiWfcd2croPf8y-1
 
-feature-myprofile-francisco
+ERD link: https://lucid.app/lucidchart/280b743e-56f4-4082-ac41-4038c27e5185/edit?viewport_loc=-1249%2C-308%2C2217%2C1084%2C0_0&invitationId=inv_092952bb-38fa-4b10-a45a-8221c0308096
+## Developers Profile
 ## 👨‍💻Team Members:
-**Member 1:**
+### Member 1:
 
 **NAME:** Ezzel Jan Francisco
 
 **COURSE & YEAR:** BSIT - 3
 
-## 🍒 About Me
+### 🍒 About Me
 I am a 3rd year IT student currently studying in Cebu Institute of Technology - University. I am passionate about **technology and design**. I enjoy working on projects that involve **web development**, **UI/UX design**, and **software development**. My experience includes building applications using React, Spring Boot, and Django, as well as working with databases. My goal is to pursue a career in a design-related field and eventually work abroad.
-=======
-## Team Members
+
+
 
 ### Member 2
  **Name**: Ragelo John C. Gare  
