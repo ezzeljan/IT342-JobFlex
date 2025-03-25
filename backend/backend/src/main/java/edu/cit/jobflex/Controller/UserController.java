@@ -23,6 +23,11 @@ import org.springframework.web.multipart.MultipartFile;
 import edu.cit.jobflex.Service.UserService;
 import edu.cit.jobflex.Entity.UserEntity;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+
+
+@Tag(name = "User Controller", description = "APIs for managing users")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -30,21 +35,25 @@ public class UserController {
 	@Autowired
 	private UserService userv;
 	
+	@Operation(summary = "Add a new user", description = "Creates a new user in the system")
 	@PostMapping("/add")
 	public UserEntity addUser(@RequestBody UserEntity user) {
 		return userv.saveUser(user);
 	}
 	
+	@Operation(summary = "Get all users", description = "Retrieves all users from the database")
 	@GetMapping("/getAllUser")
 	public List<UserEntity> getAllUser() {
 		return userv.getAllUser()
 ;	}
 	
+	@Operation(summary = "Update user details", description = "Updates user information by ID")
 	@PutMapping("/updateUser")
 	public UserEntity updateUser(@RequestParam int userId, @RequestBody UserEntity newUserDetails) {
 		return userv.updateUser(userId, newUserDetails);
 	}
 	
+	@Operation(summary = "Delete a user", description = "Deletes a user by their ID")
 	@DeleteMapping("/deleteUser/{userId}")
 	public String deleteUser(@PathVariable int userId) {
 		return userv.deleteUser(userId);
