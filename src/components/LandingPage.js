@@ -23,7 +23,7 @@ const LandingPage = () => {
       <section className="main-section" id="home">
         <div className="text-container" data-aos="fade-up">
           <h1 className="main-heading">Connect with Local Services Instantly</h1>
-          <p className="description">Trabahanap connects you with trusted local service providers for <br/>quick
+          <p className="description">Jobflex connects you with trusted local service providers for <br/>quick
             and easy bookings to meet your everyday needs
           </p>
           <br/>
@@ -46,10 +46,10 @@ const LandingPage = () => {
             <h2 className="about-heading">Finding Trusted Local Services Made Easy</h2>
           </div>
           <div className="about-description-card about-card">
-          <p id="about-description"> Trabahanap is your go-to platform for booking trusted local services. 
+          <p id="about-description"> Jobflex is your go-to platform for booking trusted local services. 
             Whether you need a plumber, a handyman for a quick fix, or event assistance 
-            for just one day, Trabahanap connects you with skilled professionals in your 
-            community. Trabahanap is dedicated to helping people find reliable service 
+            for just one day, Jobflex connects you with skilled professionals in your 
+            community. Jobflex is dedicated to helping people find reliable service 
             providers for immediate and short-term needs.
           </p>
           </div>

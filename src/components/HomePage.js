@@ -112,7 +112,7 @@ function HomePage() {
         </div>
 
         <div className="services-selection-container">
-          <h2 className="find-services-message">Find services on Trabahanap</h2>
+          <h2 className="find-services-message">Find services on Jobflex</h2>
           <ServiceList searchQuery={searchQuery}/>
         </div>
       </main>
@@ -135,7 +135,7 @@ function HomePage() {
       {showRolePrompt && (
         <div className="role-prompt-modal">
           <div className="role-prompt-content">
-            <h3>What brings you to Trabahanap?</h3>
+            <h3>What brings you to Jobflex?</h3>
             <p>We want to tailor your experience so you'll feel right at home.</p>
             <div className="role-prompt-buttons">
               <button

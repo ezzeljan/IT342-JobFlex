@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <nav className="nav-bar">
       <RouterLink to="/" style={{ textDecoration: 'none' }}>
-        <div className="navbar-title">TrabaHanap</div>
+        <div className="navbar-title">Jobflex</div>
       </RouterLink>
       <ul className="navbar-links">
         <li><a href="#home">Home</a></li>
