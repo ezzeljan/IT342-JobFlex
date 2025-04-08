@@ -1,9 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+
 
 const LandingPage = () => {
   return (
     <div>
-      <h1>Landing Page Loaded</h1>
+      <header className="header">
+        <div className="logo">JobFlex</div>
+        <nav>
+          {/* Use Link instead of <a> for routing */}
+          <Link to="/login">Login</Link>
+          <Link to="/register">Sign Up</Link>
+        </nav>
+      </header>
       <style>{`
         * {
           margin: 0;
@@ -68,7 +78,7 @@ const LandingPage = () => {
           display: flex;
           justify-content: center;
           gap: 1rem;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 6px rgba(85, 105, 78, 0.1);
           margin: 2rem auto;
           border-radius: 10px;
           max-width: 900px;
@@ -211,10 +221,14 @@ const LandingPage = () => {
       <header className="header">
         <div className="logo">JobFlex</div>
         <nav>
-          <a href="#">Home</a>
-          <a href="#">Build Resume</a>
-          <button className="login-btn">Login</button>
-          <button className="signup-btn">Sign Up</button>
+          <Link to="/">Home</Link>
+          <Link to="/build-resume">Build Resume</Link>
+          <Link to="/login">
+            <button className="login-btn">Login</button>
+          </Link>
+          <Link to="/signup">
+            <button className="signup-btn">Sign Up</button>
+          </Link>
         </nav>
       </header>
 

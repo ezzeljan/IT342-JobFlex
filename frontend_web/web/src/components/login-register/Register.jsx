@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles"
 import MailOutlineIcon from "@mui/icons-material/MailOutline"
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import GoogleIcon from "@mui/icons-material/Google"
-import InputAdornment from "@mui/material/InputAdornment"
+import { InputAdornment } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 
 // Styled components
@@ -207,5 +207,5 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Register;
 
