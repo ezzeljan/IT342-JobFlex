@@ -17,7 +17,10 @@ import BookingServiceProvider from './components/BookingServiceProvider';
 import AddBooking from './components/AddBooking';
 import Landing from './components/Landing';
 import Home from './components/Home';
+import Resume from './components/ResumeMaker';
 import Profile from './components/ProfilePage';
+import Employer from './components/EmployerLanding';
+import JobPosting from './components/JobPosting';
 import { UserProvider } from './components/UserContext';
 
 function App() {
@@ -44,6 +47,9 @@ function App() {
         <Route path ="/addbooking" element={<AddBooking/>} />
         <Route path ="/home" element={<Home/>} />
         <Route path ="/profile" element={<Profile/>} />
+        <Route path="/employer" element={<Employer />} />
+        <Route path="/jobpost" element={<JobPosting />} />
+        <Route path="/resumemaker" element={<Resume />} />
       </Routes>
     </Router>
     </UserProvider>

@@ -44,18 +44,20 @@
 .navbar-buttons {
   display: flex;
   gap: 1rem; 
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* Login button styles */
 .login-btn {
   border-style: none;
-  background-color: transparent;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.9rem;
   text-decoration: none;
-  color: black;
+  color:black;
 }
 
 /* Register button styles */

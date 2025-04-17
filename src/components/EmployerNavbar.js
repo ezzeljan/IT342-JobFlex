@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import './Navbar.css';
+import './EmployerNavbar.css';
 import {Button, Divider} from "@mui/material"
 import {
   Box,
@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 
 
-function Navbar() {
+function EmployerNavbar() {
   return (
     <Box
       component="nav"
@@ -17,24 +17,25 @@ function Navbar() {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "1rem 2rem",
-        backgroundColor: "white",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        color: "white",
         position: "sticky", 
         top: "0",
+        backgroundColor: "black",
         zIndex: "1000",
       }}
     >
       {/* Left side: Logo and nav links */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 4 }}>
-        <RouterLink to="/" style={{ textDecoration: 'none' }}>
-          <Box sx={{ fontWeight: "bold", fontSize: "1.5rem", color: "black" }}>Jobflex</Box>
+        <RouterLink to="/employer" style={{ textDecoration: 'none' }}>
+          <Box sx={{ fontWeight: "bold", fontSize: "1.5rem", color: "white" }}>Jobflex</Box>
         </RouterLink>
         <Box sx={{ display: "flex", gap: 3 }}>
-          <MuiLink href="/" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
+          <MuiLink href="/employer" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
             Home
           </MuiLink>
-          <MuiLink href="/build-resume" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
-            Build Resume
+          <MuiLink href="/findresume" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
+            Find Resume
           </MuiLink>
         </Box>
       </Box>
@@ -42,26 +43,13 @@ function Navbar() {
       {/* Right side: icons and extra links */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
       <div className="navbar-buttons">
-      <Button
-        component={RouterLink}
-        to="/login"
-        variant="text"
-        sx={{
-          color: "black",
-          textTransform: "none",
-          fontSize: "0.875rem",
-          fontWeight: 500,
-        }}
-      >
-        Login
-      </Button>
-
+        <RouterLink to='/login' className="login-btn">Login</RouterLink>
         <Button
               variant="outlined"
               href="/register"
               sx={{
-                borderColor: "black",
-                color: "black",
+                borderColor: "white",
+                color: "white",
                 textTransform: "none",
                 borderRadius: "4px",
                 fontSize: "0.875rem",
@@ -74,19 +62,24 @@ function Navbar() {
             >
               Sign up
             </Button>
-        </div>
-          <Divider orientation="vertical" flexItem sx={{ height: 24, mx: 1 }} />
+      </div>
+        <Divider orientation="vertical" flexItem sx={{ 
+            height: 30, 
+            mx: 1,
+            color: "white",
+            }} 
+            />
             <MuiLink
-              href="/employer"
-              underline="none"
-              color="inherit"
-              sx={{ fontSize: "0.875rem", fontWeight: 500, display: { xs: "none", md: "block" } }}
-              >
-                Employer/ Post Job
-              </MuiLink>
+            href="/"
+            underline="none"
+            color="inherit"
+            sx={{ fontSize: "0.875rem", fontWeight: 500, display: { xs: "none", md: "block" } }}
+            >
+            Find jobs
+            </MuiLink>
       </Box>
       </Box>
   );
 }
 
-export default Navbar;
+export default EmployerNavbar;
