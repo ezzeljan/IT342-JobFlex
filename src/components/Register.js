@@ -13,7 +13,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Navbar from './Navbar';
 import Background from './Background';
-import './Register.css';
+
 
 function Register() {
     const [emailError, setEmailError] = useState("");
@@ -117,7 +117,7 @@ function Register() {
         <div className="register-page">
             <Navbar/>
             <Container component="main" maxWidth="xs" className="main-container" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "90vh", paddingBottom: "100px" }}>
-                <Background/>
+                {/*<Background/>*/}
                 <Box
                     sx={{
                         marginTop: 8,
@@ -199,7 +199,14 @@ function Register() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ 
+                                mt: 3, 
+                                mb: 2,
+                                backgroundColor: "#2DBE5F",
+                                "&:hover": {
+                                  backgroundColor: "#28ab56",
+                                  },
+                              }}
                         >
                             Register
                         </Button>

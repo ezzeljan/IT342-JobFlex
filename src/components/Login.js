@@ -11,7 +11,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { IconButton, InputAdornment } from '@mui/material';
 import Navbar from './Navbar';
-import './Register.css';
 import Background from './Background';
 
 function Login() {
@@ -84,7 +83,7 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(result)); // Store the full user data if needed
 
         alert("Login successful!");
-        navigate("/homepage"); // Navigate to homepage after successful login
+        navigate("/home"); // Navigate to homepage after successful login
       } else {
         throw new Error("User ID not found in the response");
       }
@@ -98,7 +97,7 @@ function Login() {
     <div className="login-page">
       <Navbar />
       <Container component="main" maxWidth="xs" className="main-container" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "90vh", paddingBottom: "100px" }}>
-        <Background />
+        {/*<Background />*/}
         <Box className="login-box"
           sx={{
             marginTop: 8,
@@ -162,7 +161,14 @@ function Login() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ 
+                mt: 3, 
+                mb: 2,
+                backgroundColor: "#2DBE5F",
+                "&:hover": {
+                  backgroundColor: "#28ab56",
+                  },
+              }}
             >
               Log in
             </Button>

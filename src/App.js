@@ -15,6 +15,9 @@ import Booking from './components/Booking';
 import MyBooking from './components/MyBooking';
 import BookingServiceProvider from './components/BookingServiceProvider';
 import AddBooking from './components/AddBooking';
+import Landing from './components/Landing';
+import Home from './components/Home';
+import Profile from './components/ProfilePage';
 import { UserProvider } from './components/UserContext';
 
 function App() {
@@ -23,7 +26,8 @@ function App() {
     <UserProvider>
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+      <Route path ="/" element={<Landing/>} />
+        <Route path="/landing" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/homepage" element={<HomePage />} />
@@ -38,6 +42,8 @@ function App() {
         <Route path="/yourbooking" element={<BookingServiceProvider />} />
         <Route path="/booking/:serviceID" element={<Booking />} /> 
         <Route path ="/addbooking" element={<AddBooking/>} />
+        <Route path ="/home" element={<Home/>} />
+        <Route path ="/profile" element={<Profile/>} />
       </Routes>
     </Router>
     </UserProvider>

@@ -19,9 +19,9 @@ function HomePage() {
     } else if (user.userType === null) {
       setShowRolePrompt(true);
     } else {
-      if (user.userType === 'Customer') {
+      if (user.userType === 'Job Seeker') {
         navigate('/homepage');
-      } else if (user.userType === 'Service Provider') {
+      } else if (user.userType === 'Employer') {
         navigate('/providerhome');
       }
     }
@@ -46,9 +46,9 @@ function HomePage() {
       if (updatedUser.userType === null) {
         setShowRolePrompt(true);
       } else {
-        if (updatedUser.userType === 'Customer') {
+        if (updatedUser.userType === 'Job Seeker') {
           navigate('/homepage');
-        } else if (updatedUser.userType === 'Service Provider') {
+        } else if (updatedUser.userType === 'Employer') {
           navigate('/providerhome');
         }
       }
@@ -78,9 +78,9 @@ function HomePage() {
       setUser(updatedUser);
       setShowRolePrompt(false);
 
-      if (role === 'Customer') {
+      if (role === 'Job Seeker') {
         navigate('/homepage');
-      } else if (role === 'Service Provider') {
+      } else if (role === 'Employer') {
         navigate('/providerhome');
       }
     } catch (err) {
@@ -139,18 +139,18 @@ function HomePage() {
             <p>We want to tailor your experience so you'll feel right at home.</p>
             <div className="role-prompt-buttons">
               <button
-                onClick={() => handleRoleSelection('Customer')}
-                className={role === 'Customer' ? 'selected' : ''}
+                onClick={() => handleRoleSelection('Job Seeker')}
+                className={role === 'Job Seeker' ? 'selected' : ''}
               >
-                <h4>Seeker</h4>
-                <p>You can browse and book local services in your area, from home repairs to personal assistance, all at your convenience.</p>
+                <h4>Job Seeker</h4>
+                <p>You can browse and apply for job openings, from internships, work-from-home, part-time, to full-time, all at your convenience.</p>
               </button>
               <button
-                onClick={() => handleRoleSelection('Service Provider')}
-                className={role === 'Service Provider' ? 'selected' : ''}
+                onClick={() => handleRoleSelection('Employer')}
+                className={role === 'Employer' ? 'selected' : ''}
               >
-                <h4>Provider</h4>
-                <p>You can offer your local expertise, manage bookings, and connect with customers in your community seeking your services.</p>
+                <h4>Employer</h4>
+                <p>You can post job hirings, manage applications, and connect with applicants.</p>
               </button>
             </div>
             {role && (

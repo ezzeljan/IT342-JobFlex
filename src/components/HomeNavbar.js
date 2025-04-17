@@ -1,83 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { SearchOutlined, FavoriteBorderOutlined, NotificationsOutlined, MailOutline } from '@mui/icons-material';
-import { Avatar } from '@mui/material';
-import './HomeNavbar.css';
+import React, { useState } from "react";
+import {
+  Box,
+  IconButton,
+  Divider,
+  Link as MuiLink,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import { Notifications, ChatBubbleOutline, Person } from "@mui/icons-material";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
-function HomeNavbar({ handleSearch, userAvatar }) {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [userRole, setUserRole] = useState(null); // State for user role
+export default function HomeNavbar() {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      setUserRole(user.userType); // Set user role from local storage
-    }
-  }, []);
-
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  const handleInputChange = (e) => {
-    handleSearch(e.target.value);
+  const handleMenuClose = () => {
+    setAnchorEl(null);
   };
 
   const handleLogout = () => {
-    // Clear user data from localStorage and navigate to login
     localStorage.removeItem("user");
-    setUserRole(null); // Reset user role
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
-    <nav className="nav-bar">
-      <div className="navbar-left">
-        <RouterLink to="/homepage" style={{ textDecoration: 'none' }}>
-          <div className="navbar-title">TrabaHanap</div>
+    <Box
+      component="nav"
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "1rem 2rem",
+        backgroundColor: "white",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        position: "sticky",
+        top: "0",
+        zIndex: "1000",
+      }}
+    >
+      {/* Left side: Logo and nav links */}
+      <Box sx={{ display: "flex", alignItems: "center", gap: 4 }}>
+        <RouterLink to="/" style={{ textDecoration: 'none' }}>
+          <Box sx={{ fontWeight: "bold", fontSize: "1.5rem", color: "black" }}>Jobflex</Box>
         </RouterLink>
-        <div className="navbar-search-container">
-          <SearchOutlined className="search-icon" />
-          <input
-            type="text"
-            placeholder="Search..."
-            className="navbar-search"
-            onChange={handleInputChange}
-          />
-        </div>
-      </div>
-      <div className="navbar-right">
-        {/* Profile Icon with Dropdown */}
-        <MailOutline className="navbar-icon" title="Messages" />
-        <FavoriteBorderOutlined className="navbar-icon" title="Favorites" />
-        <NotificationsOutlined className="navbar-icon" title="Notifications" />
+        <Box sx={{ display: "flex", gap: 3 }}>
+          <MuiLink href="/" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
+            Home
+          </MuiLink>
+          <MuiLink href="/build-resume" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
+            Build Resume
+          </MuiLink>
+        </Box>
+      </Box>
 
-        
-        <div className="profile-icon-container">
-          <Avatar
-            src={userAvatar}
-            alt="User Avatar"
-            onClick={toggleDropdown}
-            sx={{ cursor: 'pointer', width: 40, height: 40 }}
-          >
-            {!userAvatar ? null : "U"}
-          </Avatar>
-          {showDropdown && (
-            <div className="dropdown-menu">
-              <RouterLink to="/profilepage" className="dropdown-item">Profile</RouterLink>
-              {userRole === 'Service Provider' ? (
-                <RouterLink to="/yourbooking" className="dropdown-item">My Booking</RouterLink>
-              ) : (
-                <RouterLink to="/mybooking" className="dropdown-item">My Booking</RouterLink>
-              )}
-              <button onClick={handleLogout} className="dropdown-item">Logout</button>
-            </div>
-          )}
-        </div>
-      </div>
-    </nav>
+      {/* Right side: Icons and menu */}
+      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <IconButton size="small">
+          <Notifications sx={{ fontSize: 20 }} />
+        </IconButton>
+        <IconButton size="small">
+          <ChatBubbleOutline sx={{ fontSize: 20 }} />
+        </IconButton>
+        <IconButton size="small" onClick={handleMenuOpen}>
+          <Person sx={{ fontSize: 20 }} />
+        </IconButton>
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleMenuClose}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        >
+          <MenuItem onClick={() => { navigate("/profile"); handleMenuClose(); }}>Profile</MenuItem>
+          <MenuItem onClick={() => { navigate("/my-jobs"); handleMenuClose(); }}>My Jobs</MenuItem>
+          <MenuItem onClick={() => { navigate("/settings"); handleMenuClose(); }}>Settings</MenuItem>
+          <Divider />
+          <MenuItem onClick={handleLogout}>Log Out</MenuItem>
+        </Menu>
+
+        <Divider orientation="vertical" flexItem sx={{ height: 24, mx: 1 }} />
+        <MuiLink
+          href="/employer"
+          underline="none"
+          color="inherit"
+          sx={{ fontSize: "0.875rem", fontWeight: 500, display: { xs: "none", md: "block" } }}
+        >
+          Employer/ Post Job
+        </MuiLink>
+      </Box>
+    </Box>
   );
 }
-
-export default HomeNavbar;
