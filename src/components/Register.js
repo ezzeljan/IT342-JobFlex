@@ -12,8 +12,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Navbar from './Navbar';
-import Background from './Background';
-
 
 function Register() {
     const [emailError, setEmailError] = useState("");
@@ -21,16 +19,30 @@ function Register() {
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const [openModal, setOpenModal] = useState(false); // State for modal visibility
+    const [openModal, setOpenModal] = useState(false);
+    const [userType, setUserType] = useState(null); // 'Job Seeker' or 'Employer'
+    const [roleSelectionError, setRoleSelectionError] = useState("");
     const navigate = useNavigate();
-    const [emailTakenError, setEmailTakenError] = useState("");
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleClickShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
     const handleMouseDownPassword = (event) => event.preventDefault();
 
+    const handleLogin = () => {
+        window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+        
+        // Validate role selection first
+        if (!userType) {
+            setRoleSelectionError("Please select your role");
+            return;
+        } else {
+            setRoleSelectionError("");
+        }
+
         const data = new FormData(event.currentTarget);
         const email = data.get("email");
         const password = data.get("password");
@@ -48,22 +60,6 @@ function Register() {
         } else {
             setEmailError("");
         }
-
-        //To check if unique ang email unta
-        /*if (isValid) {
-            try {
-                const emailResponse = await fetch(`http://localhost:8080/user/check-email?email=${email}`);
-                if (emailResponse.status === 409) { // Conflict: email already in use
-                    setEmailTakenError("Email is already taken");
-                    isValid = false;
-                } else if (emailResponse.status === 200) {
-                    setEmailTakenError(""); // Email available
-                }
-            } catch (err) {
-                alert("Error checking email availability");
-                isValid = false;
-            }
-        }*/
 
         if (!password) {
             setPasswordError("Password is required");
@@ -85,7 +81,8 @@ function Register() {
 
         const user = {
             email: email,
-            password: password
+            password: password,
+            userType: userType // Include the selected role
         };
 
         try {
@@ -117,7 +114,6 @@ function Register() {
         <div className="register-page">
             <Navbar/>
             <Container component="main" maxWidth="xs" className="main-container" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "90vh", paddingBottom: "100px" }}>
-                {/*<Background/>*/}
                 <Box
                     sx={{
                         marginTop: 8,
@@ -131,7 +127,47 @@ function Register() {
                         Register
                     </Typography>
 
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    {/* Role Selection */}
+                    <Box sx={{ width: '100%', mb: 2 }}>
+                        <Typography variant="subtitle1" sx={{ mb: 1 }}>I am a:</Typography>
+                        <Box sx={{ display: 'flex', gap: 2 }}>
+                            <Button
+                                fullWidth
+                                variant={userType === 'Job Seeker' ? 'contained' : 'outlined'}
+                                onClick={() => setUserType('Job Seeker')}
+                                sx={{
+                                    py: 2,
+                                    backgroundColor: userType === 'Job Seeker' ? '#2DBE5F' : 'transparent',
+                                    '&:hover': {
+                                        backgroundColor: userType === 'Job Seeker' ? '#28ab56' : '#f5f5f5',
+                                    }
+                                }}
+                            >
+                                Job Seeker
+                            </Button>
+                            <Button
+                                fullWidth
+                                variant={userType === 'Employer' ? 'contained' : 'outlined'}
+                                onClick={() => setUserType('Employer')}
+                                sx={{
+                                    py: 2,
+                                    backgroundColor: userType === 'Employer' ? '#2DBE5F' : 'transparent',
+                                    '&:hover': {
+                                        backgroundColor: userType === 'Employer' ? '#28ab56' : '#f5f5f5',
+                                    }
+                                }}
+                            >
+                                Employer
+                            </Button>
+                        </Box>
+                        {roleSelectionError && (
+                            <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+                                {roleSelectionError}
+                            </Typography>
+                        )}
+                    </Box>
+
+                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '100%' }}>
                         <TextField
                             margin="normal"
                             required
@@ -205,7 +241,7 @@ function Register() {
                                 backgroundColor: "#2DBE5F",
                                 "&:hover": {
                                   backgroundColor: "#28ab56",
-                                  },
+                                },
                               }}
                         >
                             Register
@@ -218,6 +254,13 @@ function Register() {
                             </Grid>
                         </Grid>
                     </Box>
+                    <Button 
+                        onClick={handleLogin}
+                        variant="outlined"
+                        sx={{ width: '100%' }}
+                    >
+                        Register with Google
+                    </Button>
                 </Box>
             </Container>
 

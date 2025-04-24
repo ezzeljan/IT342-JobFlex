@@ -11,7 +11,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { IconButton, InputAdornment } from '@mui/material';
 import Navbar from './Navbar';
-import Background from './Background';
 
 function Login() {
   const [emailError, setEmailError] = useState("");
@@ -19,6 +18,26 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState("");
   const navigate = useNavigate();
+
+  const handleLogin = () => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+  };
+
+  /*useEffect(() => {
+    const fetchUserInfo = async () => {
+        const response = await fetch("http://localhost:8080/user/profile", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('authToken')}`, // or whatever auth method you're using
+            },
+        });
+        
+        const userInfo = await response.json();
+        console.log(userInfo); // Process user info (e.g., set in state)
+    };
+    
+    fetchUserInfo();
+}, []);*/
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -83,7 +102,12 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(result)); // Store the full user data if needed
 
         alert("Login successful!");
-        navigate("/home"); // Navigate to homepage after successful login
+        // Navigate based on userType
+        if (result.userType === "Employer") {
+          navigate("/employerdashboard");
+        } else {
+          navigate("/home");
+        }
       } else {
         throw new Error("User ID not found in the response");
       }
@@ -175,11 +199,15 @@ function Login() {
             <Grid container justifyContent="center">
               <Grid item>
                 <RouterLink to="/register" variant="body2" style={{ textDecoration: 'none' }}>
-                  {"Don't have an account? Sign Up"}
+                  {"Don't have an account? Sign Up"}<br></br>
                 </RouterLink>
+                
               </Grid>
             </Grid>
           </Box>
+          <button onClick={handleLogin}>
+            Login with Google
+          </button>
         </Box>
       </Container>
     </div>

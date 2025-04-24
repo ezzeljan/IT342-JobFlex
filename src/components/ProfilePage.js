@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ProfilePage.css';
 import HomeNavbar from './HomeNavbar';
+import EmployerNav from './EmployerNav';
 import {
   Dialog,
   DialogTitle,
@@ -28,17 +29,48 @@ function ProfilePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user.userId) {
+    if (!user.userId && !user.googleId) {
       navigate('/login');
     }
   }, [user, navigate]);
 
+  useEffect(() => {
+    const googleUserId = user?.googleId;
+    if (!googleUserId && user.loginMethod === 'google') {
+      const fetchGoogleInfo = async () => {
+        try {
+          const response = await fetch(`http://localhost:8080/user-info`, {
+            credentials: 'include',
+          });
+          const data = await response.json();
+
+          const updatedGoogleUser = {
+            ...user,
+            name: data.name,
+            email: data.email,
+            profileImage: data.picture,
+            googleId: data.sub,
+          };
+
+          setUser(updatedGoogleUser);
+          setName(data.name || '');
+          setProfileImage(data.picture || null);
+          localStorage.setItem('user', JSON.stringify(updatedGoogleUser));
+        } catch (error) {
+          console.error('Failed to fetch Google user info', error);
+        }
+      };
+
+      fetchGoogleInfo();
+    }
+  }, []);
+
   const validateForm = () => {
     const newErrors = {};
-    if (!name.trim()) newErrors.name = "Name cannot be empty";
-    if (!address.trim()) newErrors.address = "Address cannot be empty";
-    if (!phone.trim()) newErrors.phone = "Phone cannot be empty";
-    if (isEditingPassword && !password.trim()) newErrors.password = "Password cannot be empty";
+    if (!name.trim()) newErrors.name = 'Name cannot be empty';
+    if (!address.trim()) newErrors.address = 'Address cannot be empty';
+    if (!phone.trim()) newErrors.phone = 'Phone cannot be empty';
+    if (!user.googleId && isEditingPassword && !password.trim()) newErrors.password = 'Password cannot be empty';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -47,15 +79,18 @@ function ProfilePage() {
     if (!validateForm()) return;
 
     const formData = new FormData();
-    formData.append('userId', user.userId);
+    formData.append('userId', user.userId || user.googleId);
     formData.append('name', name);
     formData.append('address', address);
     formData.append('phone', phone);
     formData.append('email', user.email);
-    formData.append('password', isEditingPassword && password.trim() ? password : user.password);
     formData.append('userType', user.userType);
+    formData.append('loginMethod', user.loginMethod);
 
-    // Append profile image (if selected)
+    if (!user.googleId) {
+      formData.append('password', isEditingPassword && password.trim() ? password : user.password);
+    }
+
     if (profileImage && typeof profileImage === 'string') {
       formData.append('profileImage', profileImage);
     } else if (profileImage && profileImage instanceof File) {
@@ -69,10 +104,17 @@ function ProfilePage() {
       });
 
       if (response.ok) {
-        const updatedUser = { ...user, name, address, phone, password: password.trim() ? password : user.password, profileImage };
+        const updatedUser = {
+          ...user,
+          name,
+          address,
+          phone,
+          password: user.googleId ? undefined : (password.trim() ? password : user.password),
+          profileImage,
+        };
         localStorage.setItem('user', JSON.stringify(updatedUser));
         setUser(updatedUser);
-        setIsUpdateModalOpen(true); 
+        setIsUpdateModalOpen(true);
       } else {
         const errorMessage = await response.text();
         alert('Error: ' + errorMessage);
@@ -86,57 +128,64 @@ function ProfilePage() {
   const handleProfileImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setProfileImage(file); 
-      const newUser = { ...user, profileImage: URL.createObjectURL(file) }; 
+      setProfileImage(file);
+      const newUser = { ...user, profileImage: URL.createObjectURL(file) };
       localStorage.setItem('user', JSON.stringify(newUser));
     }
   };
 
-  // Image URL logic
   const profileImageUrl = profileImage
-  ? profileImage instanceof File
-    ? URL.createObjectURL(profileImage) 
-    : `http://localhost:8080/${profileImage}` 
-  : 'http://localhost:8080/uploads/default-profile.jpg'; 
+    ? profileImage instanceof File
+      ? URL.createObjectURL(profileImage)
+      : `http://localhost:8080/${profileImage}`
+    : 'http://localhost:8080/uploads/default-profile.jpg';
 
   const handleDeleteAccount = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/user/deleteUser/${user.userId}`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(
+        `http://localhost:8080/user/deleteUser/${user.userId || user.googleId}`,
+        { method: 'DELETE' }
+      );
 
       if (response.ok) {
         localStorage.removeItem('user');
-        setIsDeleteModalOpen(true); 
+        return true;
       } else {
         const errorMessage = await response.text();
         alert('Error: ' + errorMessage);
+        return false;
       }
     } catch (error) {
       console.error('Error deleting account:', error);
       alert('Error deleting account');
+      return false;
     }
   };
 
   return (
     <div className="profile-page">
-      <HomeNavbar userAvatar={profileImageUrl}/>
+      {user.userType === 'Employer' ? (
+        <EmployerNav />
+      ) : (
+        <HomeNavbar userAvatar={profileImageUrl} />
+      )}
+
       <div className="profile-container">
         <h2 className="profile-title">Profile</h2>
+        {user.googleId && (
+          <Typography variant="caption" color="primary" style={{ textAlign: 'center' }}>
+            Logged in with Google
+          </Typography>
+        )}
         <form onSubmit={(e) => e.preventDefault()} className="profile-form">
-          {/* Profile Image Upload */}
           <div className="profile-image-container">
-            <Avatar 
-              src={profileImageUrl} 
-              alt="Profile" 
-              sx={{ width: 100, height: 100, margin: 'auto' }} 
-            />
-            <input 
-              accept="image/*" 
-              style={{ display: 'none' }} 
-              id="upload-profile-image" 
-              type="file" 
-              onChange={handleProfileImageChange} 
+            <Avatar src={profileImageUrl} alt="Profile" sx={{ width: 100, height: 100, margin: 'auto' }} />
+            <input
+              accept="image/*"
+              style={{ display: 'none' }}
+              id="upload-profile-image"
+              type="file"
+              onChange={handleProfileImageChange}
             />
             <label htmlFor="upload-profile-image">
               <IconButton component="span">
@@ -145,7 +194,6 @@ function ProfilePage() {
             </label>
           </div>
 
-          {/* Form Fields */}
           <div className="profile-form-group">
             <label className="profile-label">Name</label>
             <input
@@ -156,6 +204,7 @@ function ProfilePage() {
             />
             {errors.name && <p className="error">{errors.name}</p>}
           </div>
+
           <div className="profile-form-group">
             <label className="profile-label">Email</label>
             <input
@@ -163,8 +212,10 @@ function ProfilePage() {
               type="email"
               value={user.email || ''}
               readOnly
+              style={{ backgroundColor: user.googleId ? '#f5f5f5' : 'white' }}
             />
           </div>
+
           <div className="profile-form-group">
             <label className="profile-label">Address</label>
             <input
@@ -175,6 +226,7 @@ function ProfilePage() {
             />
             {errors.address && <p className="error">{errors.address}</p>}
           </div>
+
           <div className="profile-form-group">
             <label className="profile-label">Phone</label>
             <input
@@ -185,44 +237,35 @@ function ProfilePage() {
             />
             {errors.phone && <p className="error">{errors.phone}</p>}
           </div>
-          <div className="profile-form-group">
-            <label className="profile-label">Password</label>
-            <input
-              className="profile-input"
-              type="password"
-              value={password}
-              onClick={() => setIsEditingPassword(true)}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {errors.password && <p className="error">{errors.password}</p>}
-          </div>
+
+          {!user.googleId && (
+            <div className="profile-form-group">
+              <label className="profile-label">Password</label>
+              <input
+                className="profile-input"
+                type="password"
+                value={password}
+                onClick={() => setIsEditingPassword(true)}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {errors.password && <p className="error">{errors.password}</p>}
+            </div>
+          )}
+
           <div className="profile-form-group">
             <label className="profile-label">Role (User Type)</label>
-            <input
-              className="profile-input"
-              type="text"
-              value={user.userType || ''}
-              readOnly
-            />
+            <input className="profile-input" type="text" value={user.userType || ''} readOnly />
           </div>
-          <button
-            className="profile-button"
-            type="button"
-            onClick={handleSaveChanges}
-          >
+
+          <button className="profile-button" type="button" onClick={handleSaveChanges}>
             Save Changes
           </button>
-          <button
-            className="delete-account-button"
-            type="button"
-            onClick={() => setIsDeleteModalOpen(true)}
-          >
+          <button className="delete-account-button" type="button" onClick={() => setIsDeleteModalOpen(true)}>
             Delete Account
           </button>
         </form>
       </div>
 
-      {/* Update Modal */}
       <Dialog open={isUpdateModalOpen} onClose={() => setIsUpdateModalOpen(false)}>
         <DialogTitle>Update Successful</DialogTitle>
         <DialogContent>
@@ -233,7 +276,6 @@ function ProfilePage() {
         </DialogActions>
       </Dialog>
 
-      {/* Delete Modal */}
       <Dialog open={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)}>
         <DialogTitle>Delete Account</DialogTitle>
         <DialogContent>
@@ -244,10 +286,12 @@ function ProfilePage() {
         <DialogActions>
           <Button onClick={() => setIsDeleteModalOpen(false)}>Cancel</Button>
           <Button
-            onClick={() => {
+            onClick={async () => {
               setIsDeleteModalOpen(false);
-              handleDeleteAccount();
-              navigate('/login'); // Redirect after deletion
+              const response = await handleDeleteAccount();
+              if (response) {
+                navigate('/login');
+              }
             }}
             color="error"
           >

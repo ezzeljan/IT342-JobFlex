@@ -19,7 +19,7 @@ const ServiceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8080/api/services", service);
+      await axios.post("http://localhost:8080/api/services/create", service);
       alert("Service added successfully!");
       setService({
         title: "",

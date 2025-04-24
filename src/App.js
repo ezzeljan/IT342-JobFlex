@@ -20,12 +20,13 @@ import Home from './components/Home';
 import Resume from './components/ResumeMaker';
 import Profile from './components/ProfilePage';
 import Employer from './components/EmployerLanding';
-import JobPosting from './components/JobPosting';
+import EmployerDashboard from './components/Employer';
+import JobPosting from './components/JobPost';
 import { UserProvider } from './components/UserContext';
+
 
 function App() {
   return (
-
     <UserProvider>
     <Router>
       <Routes>
@@ -48,6 +49,7 @@ function App() {
         <Route path ="/home" element={<Home/>} />
         <Route path ="/profile" element={<Profile/>} />
         <Route path="/employer" element={<Employer />} />
+        <Route path="/employerdashboard" element={<EmployerDashboard />} />
         <Route path="/jobpost" element={<JobPosting />} />
         <Route path="/resumemaker" element={<Resume />} />
       </Routes>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import Navbar from './EmployerNavbar';
@@ -23,6 +24,8 @@ const JobPosting = () => {
   const jobLevelOptions = [];
   const countryOptions = [];
   const cityOptions = [];
+  const navigate = useNavigate();
+
 
   return (
     <Box sx={{ bgcolor: "background.paper" }}>
@@ -41,6 +44,7 @@ const JobPosting = () => {
             fontWeight: 300,
             textTransform: "none",
           }}
+          onClick={() => navigate('/employer')}
         >
           Back
         </Button>

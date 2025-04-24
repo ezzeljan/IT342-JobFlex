@@ -15,13 +15,64 @@ import {
   import { useNavigate } from "react-router-dom";
 
 
-  function Home () {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
+  function Home() {
+    const [user, setUser] = useState(null); // Initialize as null to distinguish from empty object
     const [showRolePrompt, setShowRolePrompt] = useState(false);
     const [role, setRole] = useState("");
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
   
     useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const res = await fetch("http://localhost:8080/user/auth", {
+            credentials: "include",
+          });
+          
+          if (!res.ok) {
+            throw new Error("Failed to fetch user");
+          }
+          
+          const data = await res.json();
+          setUser(data);
+          localStorage.setItem("user", JSON.stringify(data));
+  
+          // Check if user needs to select role
+          if (data && !data.userType) {
+            setShowRolePrompt(true);
+          }
+        } catch (err) {
+          console.error("Failed to fetch user:", err);
+          // If auth fails, redirect to login
+          navigate('/login');
+        } finally {
+          setIsLoading(false);
+        }
+      };
+  
+      fetchUser();
+    }, [navigate]);
+  
+    useEffect(() => {
+      // Only proceed if user is loaded (not null)
+      if (user === null) return;
+  
+      // If user exists but has no type, show prompt (handled in first useEffect)
+      if (!user.userType) return;
+  
+      // Navigate based on user type
+      if (user.userType === "Employer") {
+        navigate("/employerdashboard");
+      } else {
+        navigate("/home");
+      }
+    }, [user, navigate]);
+  
+    // ... rest of your component code ...
+    
+    
+  
+   /* useEffect(() => {
       if (user.userType === null || user.userType === undefined) {
         setShowRolePrompt(true);
       } else {
@@ -29,8 +80,8 @@ import {
       }
     }, [user, navigate]);
     
-  
-    const userAvatar = user.profileImage || 'http://localhost:8080/uploads/default-profile.jpg';
+  */
+    //const userAvatar = user.profileImage || 'http://localhost:8080/uploads/default-profile.jpg';
   
     
   
@@ -39,13 +90,19 @@ import {
     };
   
     const handleSubmitRole = async () => {
+      if (!role) return;
+      
       try {
-        const response = await fetch(`http://localhost:8080/user/update-role`, {
-          method: "POST",
+        const response = await fetch("http://localhost:8080/user/update-role", {
+          method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId: user.userId, userType: role })
+          credentials: "include",
+          body: JSON.stringify({ 
+            userId: user?.userId || user?.googleId, 
+            userType: role 
+          }),
         });
-  
+        
         if (!response.ok) {
           throw new Error("Failed to update role");
         }
@@ -55,15 +112,12 @@ import {
         setUser(updatedUser);
         setShowRolePrompt(false);
   
-        if (role === 'Job Seeker') {
-          navigate('/home');
-        } else if (role === 'Employer') {
-          navigate('/home');
-        }
+        // The navigation will be handled by the second useEffect
       } catch (err) {
         console.error("Error submitting role:", err);
       }
     };
+    
   
   const StyledTextField = styled(TextField)({
     "& .MuiOutlinedInput-root": {
@@ -92,6 +146,10 @@ import {
     textTransform: "none",
     padding: "6px 16px",
   })
+  if (isLoading) {
+    return <div>Loading...</div>; // Or a proper loading spinner
+  }
+
     return (
       <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <HomeNavbar />
