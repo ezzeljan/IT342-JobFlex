@@ -45,11 +45,11 @@ export default function HomeNavbar() {
     >
       {/* Left side: Logo and nav links */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 4 }}>
-        <RouterLink to="/home" style={{ textDecoration: 'none' }}>
+        <RouterLink to="/homepage" style={{ textDecoration: 'none' }}>
           <Box sx={{ fontWeight: "bold", fontSize: "1.5rem", color: "black" }}>Jobflex</Box>
         </RouterLink>
         <Box sx={{ display: "flex", gap: 3 }}>
-          <MuiLink href="/home" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
+          <MuiLink href="/homepage" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
             Home
           </MuiLink>
           <MuiLink href="/build-resume" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>

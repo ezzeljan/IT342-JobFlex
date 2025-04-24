@@ -45,11 +45,11 @@ export default function EmployerNav() {
     >
       {/* Left side: Logo and nav links */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 4 }}>
-        <RouterLink to="/employerdashboard" style={{ textDecoration: 'none' }}>
+        <RouterLink to="/providerhome" style={{ textDecoration: 'none' }}>
           <Box sx={{ fontWeight: "bold", fontSize: "1.5rem", color: "white" }}>Jobflex</Box>
         </RouterLink>
         <Box sx={{ display: "flex", gap: 3 }}>
-          <MuiLink href="/employerdashboard" underline="none" color="white" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
+          <MuiLink href="/providerhome" underline="none" color="white" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
             Home
           </MuiLink>
           <MuiLink href="/find-resume" underline="none" color="white" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>

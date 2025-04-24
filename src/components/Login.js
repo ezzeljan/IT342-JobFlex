@@ -104,9 +104,9 @@ function Login() {
         alert("Login successful!");
         // Navigate based on userType
         if (result.userType === "Employer") {
-          navigate("/employerdashboard");
+          navigate("/providerhome");
         } else {
-          navigate("/home");
+          navigate("/homepage");
         }
       } else {
         throw new Error("User ID not found in the response");

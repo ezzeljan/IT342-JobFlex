@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ProviderHomepage.css';
 import { useNavigate } from 'react-router-dom';
-import HomeNavbar from './HomeNavbar';
+import EmployerNav from './EmployerNav';
 import beagleImage from '../assets/beagle.png';
 import ServiceList from './ServiceList';
 import axios from 'axios';
@@ -47,7 +47,7 @@ function ProviderHomePage() {
 
     return (
         <div className="homepage">
-            <HomeNavbar handleLogout={handleLogout} handleSearch={handleSearch}/>
+            <EmployerNav handleLogout={handleLogout} handleSearch={handleSearch}/>
             <main className="content">
                 <div className="info-display-container">
                     <div className="greeting">Welcome, {user.name || "User"}!</div>

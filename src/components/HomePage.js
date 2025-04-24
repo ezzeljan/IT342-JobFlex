@@ -117,7 +117,7 @@ function HomePage() {
         </div>
       </main>
 
-      {showNamePrompt && (
+      {/*{showNamePrompt && (
         <div className="name-prompt-modal">
           <div className="name-prompt-content">
             <h3>Enter your name</h3>
@@ -130,9 +130,9 @@ function HomePage() {
             <button onClick={handleSaveName}>Save</button>
           </div>
         </div>
-      )}
+      )}*/}
 
-      {showRolePrompt && (
+{/*{showRolePrompt && (
         <div className="role-prompt-modal">
           <div className="role-prompt-content">
             <h3>What brings you to Jobflex?</h3>
@@ -160,7 +160,7 @@ function HomePage() {
             )}
           </div>
         </div>
-      )}
+      )}*/}
     </div>
   );
 }
