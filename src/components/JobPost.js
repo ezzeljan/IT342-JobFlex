@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, Typography, Button, TextField, Grid, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Typography, Button, TextField, Box } from "@mui/material";
 
 const API_URL = "http://localhost:8080/api/jobs";
 
 export default function JobPost() {
+  const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
@@ -13,10 +15,15 @@ export default function JobPost() {
     jobType: "",
     shiftAndSchedule: "",
     description: "",
-    userId: ""
+    employerId: ""
   });
 
   useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      // Still using storedUser.userId because that's what the DB/API expects
+      setFormData((prev) => ({ ...prev, employerId: storedUser.userId }));
+    }
     fetchJobs();
   }, []);
 
@@ -32,9 +39,9 @@ export default function JobPost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { userId, ...jobDetails } = formData;
+    const { employerId, ...jobDetails } = formData;
 
-    const res = await fetch(`${API_URL}/post?userId=${userId}`, {
+    const res = await fetch(`${API_URL}/post?userId=${employerId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(jobDetails)
@@ -42,7 +49,7 @@ export default function JobPost() {
 
     alert(await res.text());
     fetchJobs();
-    setFormData({
+    setFormData((prev) => ({
       title: "",
       company: "",
       location: "",
@@ -50,53 +57,25 @@ export default function JobPost() {
       jobType: "",
       shiftAndSchedule: "",
       description: "",
-      userId: ""
-    });
-  };
-
-  const deleteJob = async (id, userId) => {
-    if (window.confirm("Delete this job?")) {
-      const res = await fetch(`${API_URL}/delete/${id}?userId=${userId}`, {
-        method: "DELETE"
-      });
-      alert(await res.text());
-      fetchJobs();
-    }
+      employerId: prev.employerId // preserve the logged-in user's ID
+    }));
   };
 
   return (
     <Box sx={{ maxWidth: 800, mx: "auto", p: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        📋 Job Listings
-      </Typography>
-      <Grid container spacing={2} mb={4}>
-        {jobs.map((job) => (
-          <Grid item xs={12} key={job.id}>
-            <Card variant="outlined">
-              <CardContent>
-                <Typography variant="h6">{job.title}</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {job.company} | {job.location} | {job.jobType}
-                </Typography>
-                <Typography sx={{ mt: 1 }}>{job.description}</Typography>
-                <Typography variant="body2">Pay: {job.pay} | Schedule: {job.shiftAndSchedule}</Typography>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  sx={{ mt: 2 }}
-                  onClick={() => deleteJob(job.id, job.employer?.userId)}
-                >
-                  Delete
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={() => navigate("/providerhome")}
+        sx={{ mb: 2 }}
+      >
+        ← Back to My Jobs
+      </Button>
 
       <Typography variant="h5" gutterBottom>
         📝 Post a New Job
       </Typography>
+
       <Box component="form" onSubmit={handleSubmit} sx={{ display: "grid", gap: 2 }}>
         {[
           "title",
@@ -105,8 +84,7 @@ export default function JobPost() {
           "pay",
           "jobType",
           "shiftAndSchedule",
-          "description",
-          "userId"
+          "description"
         ].map((field) => (
           <TextField
             key={field}
@@ -118,6 +96,10 @@ export default function JobPost() {
             fullWidth
           />
         ))}
+
+        {/* Hidden input for employerId */}
+        <input type="hidden" name="employerId" value={formData.employerId} />
+
         <Button type="submit" variant="contained">
           Post Job
         </Button>
