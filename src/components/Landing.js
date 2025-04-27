@@ -16,6 +16,7 @@ import { Search, LocationOn } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import Navbar from "./Navbar";
 import { FavoriteBorder } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 
 const StyledTextField = styled(TextField)({
@@ -41,6 +42,7 @@ const SearchButton = styled(Button)({
 });
 
 export default function Landing() {
+  const navigate = useNavigate();
   const [titleQuery, setTitleQuery] = useState("");
   const [locationQuery, setLocationQuery] = useState("");
   const [filteredJobs, setFilteredJobs] = useState([]);
@@ -171,18 +173,21 @@ export default function Landing() {
 
     {/* New Buttons Here */}
     <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-      <Button variant="contained" size="small" sx={{ textTransform: "none" }}>
+      <Button
+        variant="contained"
+        sx={{ mt: 2, mr: 1 }}
+        onClick={() => navigate("/login")}
+      >
         Apply
       </Button>
       <Button
         variant="outlined"
-        size="small"
-        sx={{ textTransform: "none" }}
-        startIcon={<FavoriteBorder />}
+        sx={{ mt: 2 }}
+        onClick={() => navigate("/login")}
       >
         Save
       </Button>
-    </Box>
+          </Box>
   </CardContent>
 </Card>
 

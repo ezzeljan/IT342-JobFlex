@@ -35,35 +35,41 @@ function ProfilePage() {
   }, [user, navigate]);
 
   useEffect(() => {
-    const googleUserId = user?.googleId;
-    if (!googleUserId && user.loginMethod === 'google') {
-      const fetchGoogleInfo = async () => {
-        try {
-          const response = await fetch(`http://localhost:8080/user-info`, {
-            credentials: 'include',
-          });
-          const data = await response.json();
-
-          const updatedGoogleUser = {
-            ...user,
-            name: data.name,
-            email: data.email,
-            profileImage: data.picture,
-            googleId: data.sub,
-          };
-
-          setUser(updatedGoogleUser);
-          setName(data.name || '');
-          setProfileImage(data.picture || null);
-          localStorage.setItem('user', JSON.stringify(updatedGoogleUser));
-        } catch (error) {
-          console.error('Failed to fetch Google user info', error);
+    const fetchGoogleUserInfo = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/user/user-info', {
+          credentials: 'include',
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Error fetching Google user info: ${response.status}`);
         }
-      };
-
-      fetchGoogleInfo();
+  
+        const googleData = await response.json();
+        console.log("Google data received:", googleData);
+  
+        const updatedGoogleUser = {
+          ...user,
+          name: googleData.name || user.name,
+          email: googleData.email || user.email,
+          profileImage: googleData.picture || user.profileImage,
+          googleId: googleData.sub || user.googleId,
+        };
+  
+        setUser(updatedGoogleUser);
+        setName(updatedGoogleUser.name);
+        setProfileImage(updatedGoogleUser.profileImage);
+        localStorage.setItem('user', JSON.stringify(updatedGoogleUser));
+      } catch (error) {
+        console.error('Failed to fetch Google user info', error);
+      }
+    };
+  
+    if (user.loginMethod === 'google') {
+      fetchGoogleUserInfo();
     }
-  }, []);
+  }, [user]); // only depend on user
+  
 
   const validateForm = () => {
     const newErrors = {};
@@ -79,7 +85,8 @@ function ProfilePage() {
     if (!validateForm()) return;
 
     const formData = new FormData();
-    formData.append('userId', user.userId || user.googleId);
+    formData.append('userId', user.userId || '');
+    formData.append('googleId', user.googleId || '');
     formData.append('name', name);
     formData.append('address', address);
     formData.append('phone', phone);
@@ -134,11 +141,29 @@ function ProfilePage() {
     }
   };
 
-  const profileImageUrl = profileImage
-    ? profileImage instanceof File
-      ? URL.createObjectURL(profileImage)
-      : `http://localhost:8080/${profileImage}`
-    : 'http://localhost:8080/uploads/default-profile.jpg';
+  const getProfileImageUrl = () => {
+    if (!profileImage) {
+      return 'http://localhost:8080/uploads/default-profile.jpg';
+    }
+    
+    if (profileImage instanceof File) {
+      return URL.createObjectURL(profileImage);
+    }
+    
+    // Handle Google profile image or image from DB
+    if (typeof profileImage === 'string') {
+      // If it's a full URL (like Google profile picture), use directly
+      if (profileImage.startsWith('http')) {
+        return profileImage;
+      }
+      // Otherwise it's a relative path from our backend
+      return `http://localhost:8080/${profileImage}`;
+    }
+    
+    return 'http://localhost:8080/uploads/default-profile.jpg';
+  };
+
+  const profileImageUrl = getProfileImageUrl();
 
   const handleDeleteAccount = async () => {
     try {
@@ -173,8 +198,8 @@ function ProfilePage() {
       <div className="profile-container">
         <h2 className="profile-title">Profile</h2>
         {user.googleId && (
-          <Typography variant="caption" color="primary" style={{ textAlign: 'center' }}>
-            Logged in with Google
+          <Typography variant="caption" color="primary" style={{ textAlign: 'center', display: 'block', marginBottom: '15px' }}>
+            Logged in with Google (ID: {user.googleId})
           </Typography>
         )}
         <form onSubmit={(e) => e.preventDefault()} className="profile-form">
@@ -212,7 +237,7 @@ function ProfilePage() {
               type="email"
               value={user.email || ''}
               readOnly
-              style={{ backgroundColor: user.googleId ? '#f5f5f5' : 'white' }}
+              style={{ backgroundColor: '#f5f5f5' }}
             />
           </div>
 
@@ -254,7 +279,7 @@ function ProfilePage() {
 
           <div className="profile-form-group">
             <label className="profile-label">Role (User Type)</label>
-            <input className="profile-input" type="text" value={user.userType || ''} readOnly />
+            <input className="profile-input" type="text" value={user.userType || ''} readOnly style={{ backgroundColor: '#f5f5f5' }} />
           </div>
 
           <button className="profile-button" type="button" onClick={handleSaveChanges}>

@@ -22,6 +22,38 @@ function HomePage() {
     location: ''
   });
 
+  const handleApply = async (jobPostId) => {
+    if (user.userType !== 'Job Seeker') {
+      alert("Only Job Seekers can apply for jobs.");
+      return;
+    }
+  
+    try {
+      const response = await fetch(`http://localhost:8080/api/apply`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          userId: user.userId,
+          jobPostId: jobPostId,
+        }),
+      });
+  
+      const result = await response.text();
+  
+      if (response.ok) {
+        alert(result); // show success message from backend
+      } else {
+        alert("Error: " + result);
+      }
+    } catch (error) {
+      console.error("Error applying for job:", error);
+      alert("An error occurred while applying. Please try again later.");
+    }
+  };
+  
+
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({
@@ -191,7 +223,7 @@ function HomePage() {
               Pay: {job.pay} | Schedule: {job.shiftAndSchedule}
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-              <Button variant="contained" color="primary">Apply</Button>
+              <Button variant="contained" color="primary" onClick={() => handleApply(job.id)}>Apply</Button>
               <Button variant="outlined" color="secondary">Save</Button>
             </Box>
           </CardContent>

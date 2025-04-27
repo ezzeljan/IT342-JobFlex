@@ -172,7 +172,7 @@ function ProviderHomePage() {
                         {jobs
                             .filter((job) => job.employer?.userId === user.userId)
                             .map((job) => (
-                                <Grid item xs={12} sm={6} md={4} key={job.id}>
+                                <Grid item xs={12} key={job.id}>
                                     <Card variant="outlined">
                                         <CardContent>
                                             <Typography variant="h6">{job.title}</Typography>
