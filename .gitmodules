@@ -1,3 +1,0 @@
-[submodule "path/to/submodule"]
-	path = path/to/submodule
-	url = https://github.com/ezzeljan/IT342-JobFlex.git
