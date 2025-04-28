@@ -8,6 +8,7 @@ import { InputAdornment, Paper } from '@mui/material';
 import { Search, LocationOn } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import { Snackbar, Alert } from '@mui/material';
+import wallpaper from '../assets/gradient.jpg';
 
 const StyledTextField = styled(TextField)( {
   "& .MuiOutlinedInput-root": {
@@ -180,7 +181,7 @@ function HomePage() {
     <div className="homepage">
       <HomeNavbar handleLogout={handleLogout} handleSearch={handleSearch} userAvatar={userAvatar} user={user} />
       <main className="content">
-        <div className="info-display-container">
+        <div className="info-display-container" style={{ backgroundImage: `url(${wallpaper})` }}>
           <div className="greeting" style={{ fontSize: '24px', fontWeight: 'bold', color: 'white' }}>
             Welcome, 
             <span
