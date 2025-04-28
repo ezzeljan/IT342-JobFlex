@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
+import HomeNavbar from './HomeNavbar';
 
 const JobApplications = () => {
   const [applications, setApplications] = useState([]);
@@ -23,6 +24,11 @@ const JobApplications = () => {
   const [error, setError] = useState(null);
   const [user] = useState(JSON.parse(localStorage.getItem('user')) || {});
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate('/login');
+  };
 
   useEffect(() => {
     const fetchApplications = async () => {
@@ -71,39 +77,42 @@ const JobApplications = () => {
   }
 
   return (
-    <Container sx={{ mt: 5 }}>
-      <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
-        <Button startIcon={<ArrowBackIcon />} onClick={() => navigate(-1)}>
-          Back
-        </Button>
-        <Typography variant="h4">
-          Your Job Applications
-        </Typography>
-      </Stack>
+    <>
+      <HomeNavbar handleLogout={handleLogout} />
+      <Container sx={{ mt: 5 }}>
+        <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
+          <Button startIcon={<ArrowBackIcon />} onClick={() => navigate(-1)}>
+            Back
+          </Button>
+          <Typography variant="h4">
+            Your Job Applications
+          </Typography>
+        </Stack>
 
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell><strong>Job Title</strong></TableCell>
-              <TableCell><strong>Company</strong></TableCell> {/* 👈 Add column */}
-              <TableCell><strong>Date Applied</strong></TableCell>
-              <TableCell><strong>Status</strong></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {applications.map((application) => (
-              <TableRow key={application.id}>
-                <TableCell>{application.jobTitle}</TableCell>
-                <TableCell>{application.company}</TableCell> {/* 👈 Show company */}
-                <TableCell>{new Date(application.dateApplied).toLocaleDateString()}</TableCell>
-                <TableCell>{application.applicationStatus}</TableCell>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell><strong>Job Title</strong></TableCell>
+                <TableCell><strong>Company</strong></TableCell>
+                <TableCell><strong>Date Applied</strong></TableCell>
+                <TableCell><strong>Status</strong></TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
+            </TableHead>
+            <TableBody>
+              {applications.map((application) => (
+                <TableRow key={application.id}>
+                  <TableCell>{application.jobTitle}</TableCell>
+                  <TableCell>{application.company}</TableCell>
+                  <TableCell>{new Date(application.dateApplied).toLocaleDateString()}</TableCell>
+                  <TableCell>{application.applicationStatus}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+    </>
   );
 };
 

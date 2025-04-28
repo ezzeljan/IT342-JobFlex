@@ -196,6 +196,9 @@ function ProfilePage() {
       )}
 
       <div className="profile-container">
+      <button className="back-button" onClick={() => navigate(-1)}>
+        &#8592; Back
+      </button>
         <h2 className="profile-title">Profile</h2>
         {user.googleId && (
           <Typography variant="caption" color="primary" style={{ textAlign: 'center', display: 'block', marginBottom: '15px' }}>

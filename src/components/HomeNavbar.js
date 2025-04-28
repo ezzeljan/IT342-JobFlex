@@ -77,7 +77,8 @@ export default function HomeNavbar() {
           transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         >
           <MenuItem onClick={() => { navigate("/profile"); handleMenuClose(); }}>Profile</MenuItem>
-          <MenuItem onClick={() => { navigate("/job-applications"); handleMenuClose(); }}>My Applications</MenuItem> {/* New menu item */}
+          <MenuItem onClick={() => { navigate("/job-applications"); handleMenuClose(); }}>My Applications</MenuItem>
+          <MenuItem onClick={() => { navigate("/saved-jobs"); handleMenuClose(); }}>Saved Jobs</MenuItem>
           <MenuItem onClick={() => { navigate("/settings"); handleMenuClose(); }}>Settings</MenuItem>
           <Divider />
           <MenuItem onClick={handleLogout}>Log Out</MenuItem>

@@ -17,12 +17,12 @@
 }
 
 .info-display-container {
-  background-image: url('../assets/Wallpaper.jpg');
+  background-image: url('../assets/wallpaper.jpg');
   background-size: cover;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  height: 200px; 
+  height: 50px; 
   display: flex;
   position: relative;
 }
@@ -31,7 +31,7 @@
   font-family: 'Poppins';
   font-weight: bold;
   font-size: 50px;
-  color: #333;
+  color: black;
   position: absolute;
   top: 20px;
   left: 20px;
@@ -50,31 +50,18 @@
   font-family: 'Poppins';
   font-weight: bold;
   font-size: 25px;
-  color: #555;
+  color: white;
 }
-
-
-
 
 
 .services-selection-container {
-  background-color: #ffffff;
-  border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  margin-top: 50px;
 }
-
-.find-services-message {
-  margin-left: 45px;
-}
-
 
 .info-display-container, .services-selection-container,
 .more-info {
-  margin-right: 7rem;
-  margin-left: 7rem;
+  margin-right: 5rem;
+  margin-left: 5rem;
 }
 
 

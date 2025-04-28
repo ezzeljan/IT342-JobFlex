@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import serviceImage from '../assets/Wallpaper.jpg';
+import serviceImage from '../assets/wallpaper.jpg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 

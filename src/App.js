@@ -24,7 +24,7 @@ import EmployerDashboard from './components/Employer';
 import JobPosting from './components/JobPost';
 import JobApplications from './components/JobApplications';
 import { UserProvider } from './components/UserContext';
-
+import SaveJobs from './components/SavedJobsPage';
 
 function App() {
   return (
@@ -54,6 +54,7 @@ function App() {
         <Route path="/jobpost" element={<JobPosting />} />
         <Route path="/resumemaker" element={<Resume />} />
         <Route path="/job-applications" element={<JobApplications />} />
+        <Route path="/saved-jobs" element={<SaveJobs />} />
       </Routes>
     </Router>
     </UserProvider>
