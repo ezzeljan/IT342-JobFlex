@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Top Navigation Bar -->
+    <RelativeLayout
+        android:id="@+id/topNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/trabahanapLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="JobFlex"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- Welcome Section -->
+    <TextView
+        android:id="@+id/txtWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topNavBar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Welcome, User!"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- My Services Section -->
+    <RelativeLayout
+        android:id="@+id/servicesTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtWelcome"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/txtMyServices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Services"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnAddService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="#2196F3"
+            android:drawableLeft="@android:drawable/ic_menu_add"
+            android:padding="8dp"
+            android:text="Add a Service"
+            android:textColor="#FFFFFF" />
+    </RelativeLayout>
+
+    <!-- Scrollable Service Cards -->
+    <ScrollView
+        android:id="@+id/servicesScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigation"
+        android:layout_below="@+id/servicesTitleBar"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/servicesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- The service cards will be added here programmatically -->
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:padding="15dp">
+
+        <ImageButton
+            android:id="@+id/imgBtnHome"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/home" />
+
+        <ImageButton
+            android:id="@+id/imgBtnFavorite"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/favorite" />
+
+        <ImageButton
+            android:id="@+id/imgBtnCart"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/shopping_cart" />
+
+        <ImageButton
+            android:id="@+id/imgBtnProfile"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/profile" />
+
+        <ImageButton
+            android:id="@+id/imgBtnLogOut"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/logout" />
+    </LinearLayout>
+</RelativeLayout>

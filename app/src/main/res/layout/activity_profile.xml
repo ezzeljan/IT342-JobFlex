@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/back"
+        android:background="@android:color/transparent"
+        android:layout_gravity="start"
+        android:layout_margin="16dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btnBack">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="30dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="10mm"
+                android:layout_height="10mm"
+                android:src="@drawable/baseline_person_24"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User Profile"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:layout_marginVertical="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="10dp"/>
+            <TextView
+                android:id="@+id/profileUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingVertical="16dp"
+                android:layout_marginHorizontal="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="10dp"/>
+            <TextView
+                android:id="@+id/profileEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingVertical="16dp"
+                android:layout_marginHorizontal="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phone Number"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="10dp"/>
+            <TextView
+                android:id="@+id/profilePhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingVertical="16dp"
+                android:layout_marginHorizontal="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Age"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="10dp"/>
+            <TextView
+                android:id="@+id/profileAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingVertical="16dp"
+                android:layout_marginHorizontal="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sex"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="10dp"/>
+            <TextView
+                android:id="@+id/profileSex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingVertical="16dp"
+                android:layout_marginHorizontal="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Birth Date"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="10dp"/>
+            <TextView
+                android:id="@+id/profileBirthDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingVertical="16dp"
+                android:layout_marginHorizontal="10dp"/>
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Profile"
+                android:paddingVertical="20dp"
+                android:layout_marginTop="10dp"/>
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete Account"
+                android:paddingVertical="20dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@android:color/holo_red_light"/>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

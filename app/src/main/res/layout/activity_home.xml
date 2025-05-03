@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Top Navigation Bar -->
+    <RelativeLayout
+        android:id="@+id/topNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/trabahanapLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="JobFlex"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- Search bar -->
+    <EditText
+        android:id="@+id/editText_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topNavBar"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:hint="Search services"
+        android:paddingVertical="15dp"
+        android:textSize="15sp"
+        android:drawableRight="@android:drawable/ic_menu_search" />
+
+    <!-- Filter Buttons -->
+    <HorizontalScrollView
+        android:id="@+id/filterScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText_search"
+        android:layout_marginTop="15dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/btnRecommended"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Recommended" />
+
+            <Button
+                android:id="@+id/btnPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Price" />
+
+            <Button
+                android:id="@+id/btnDeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Deals" />
+
+            <Button
+                android:id="@+id/btnNearest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Nearest" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Services Section Title -->
+    <TextView
+        android:id="@+id/tvServicesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/filterScrollView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Available Services"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Scrollable Service Cards -->
+    <ScrollView
+        android:id="@+id/servicesScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigation"
+        android:layout_below="@+id/tvServicesTitle"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/servicesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Service cards will be added here programmatically -->
+            <!-- Sample service card layout -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:background="#F5F5F5"
+                android:elevation="2dp"
+                android:padding="12dp">
+
+                <ImageView
+                    android:id="@+id/serviceImage"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerCrop"
+                    android:src="@android:drawable/ic_menu_gallery" />
+
+                <TextView
+                    android:id="@+id/serviceName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/serviceImage"
+                    android:text="Service Name"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/serviceDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/serviceName"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/serviceImage"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="Service description goes here. This is a short summary of what the service offers."
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/serviceProvider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/serviceDescription"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/serviceImage"
+                    android:text="By: Provider Name"
+                    android:textColor="#555555"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:padding="15dp">
+
+        <ImageButton
+            android:id="@+id/imgBtnHome"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/home" />
+
+        <ImageButton
+            android:id="@+id/imgBtnFavorite"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/favorite" />
+
+        <ImageButton
+            android:id="@+id/imgBtnCart"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/shopping_cart" />
+
+        <ImageButton
+            android:id="@+id/imgBtnProfile"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/profile" />
+
+        <ImageButton
+            android:id="@+id/imgBtnLogOut"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/logout" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:background="#F5F5F5"
+    android:elevation="2dp"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/serviceImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@android:drawable/ic_menu_gallery" />
+
+    <TextView
+        android:id="@+id/serviceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/serviceImage"
+        android:text="Service Name"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/serviceDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/serviceName"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/serviceImage"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Service description goes here. This is a short summary of what the service offers."
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/serviceProvider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/serviceDescription"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/serviceImage"
+        android:text="By: Provider Name"
+        android:textColor="#555555"
+        android:textSize="12sp"
+        android:textStyle="italic" />
+</RelativeLayout>
