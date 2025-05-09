@@ -5,16 +5,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import HomePage from './components/HomePage';
 import LandingPage from './components/LandingPage';
-import ListProviders from './components/ListProviders';
-import AddProvider from './components/AddProvider';
 import ProfilePage from './components/ProfilePage';
 import ProviderHomepage from './components/ProviderHomepage';
-import ServiceForm from './components/ServiceForm';
-import ServiceList from './components/ServiceList';
-import Booking from './components/Booking';
-import MyBooking from './components/MyBooking';
-import BookingServiceProvider from './components/BookingServiceProvider';
-import AddBooking from './components/AddBooking';
 import Landing from './components/Landing';
 import Home from './components/Home';
 import Resume from './components/ResumeMaker';
@@ -25,6 +17,9 @@ import JobPosting from './components/JobPost';
 import JobApplications from './components/JobApplications';
 import { UserProvider } from './components/UserContext';
 import SaveJobs from './components/SavedJobsPage';
+import JobApplicants from './components/JobApplicants';
+import ResumeBuilder from './components/ResumeBuilder';
+import ApplicantProfile from './components/ApplicantProfile';
 
 function App() {
   return (
@@ -36,17 +31,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/homepage" element={<HomePage />} />
-        <Route path="/listprovider" element={<ListProviders />} />
-        <Route path="/addprovider" element={<AddProvider />} />
         <Route path="/profilepage" element={<ProfilePage />} />
         <Route path="/providerhome" element={<ProviderHomepage />} />
-        <Route path="/serviceform" element={<ServiceForm />} />
-        <Route path="/servicelist" element={<ServiceList />} />
-        <Route path="/mybooking" element={<MyBooking />} />
-        <Route path="/services" element={<ServiceList />} />
-        <Route path="/yourbooking" element={<BookingServiceProvider />} />
-        <Route path="/booking/:serviceID" element={<Booking />} /> 
-        <Route path ="/addbooking" element={<AddBooking/>} />
         <Route path ="/home" element={<Home/>} />
         <Route path ="/profile" element={<Profile/>} />
         <Route path="/employer" element={<Employer />} />
@@ -55,6 +41,9 @@ function App() {
         <Route path="/resumemaker" element={<Resume />} />
         <Route path="/job-applications" element={<JobApplications />} />
         <Route path="/saved-jobs" element={<SaveJobs />} />
+        <Route path="/job-applicants/:jobId" element={<JobApplicants />} />
+        <Route path="/resume-builder" element={<ResumeBuilder />} />
+        <Route path="/applicant-profile/:applicantId" element={<ApplicantProfile />} />
       </Routes>
     </Router>
     </UserProvider>

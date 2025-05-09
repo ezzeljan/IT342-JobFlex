@@ -34,9 +34,6 @@ function EmployerNavbar() {
           <MuiLink href="/employer" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
             Home
           </MuiLink>
-          <MuiLink href="/findresume" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
-            Find Resume
-          </MuiLink>
         </Box>
       </Box>
 

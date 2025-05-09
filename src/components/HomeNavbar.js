@@ -10,10 +10,11 @@ import {
 import { Notifications, ChatBubbleOutline, Person } from "@mui/icons-material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 
-export default function HomeNavbar() {
+export default function HomeNavbar({ handleLogout }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user")) || {};
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -23,9 +24,13 @@ export default function HomeNavbar() {
     setAnchorEl(null);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/login");
+  const handleLogoutClick = () => {
+    if (handleLogout) {
+      handleLogout();
+    } else {
+      localStorage.removeItem("user");
+      navigate("/login");
+    }
   };
 
   return (
@@ -49,12 +54,26 @@ export default function HomeNavbar() {
           <Box sx={{ fontWeight: "bold", fontSize: "1.5rem", color: "black" }}>Jobflex</Box>
         </RouterLink>
         <Box sx={{ display: "flex", gap: 3 }}>
-          <MuiLink href="/homepage" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
+          <MuiLink 
+            component={RouterLink} 
+            to="/homepage" 
+            underline="none" 
+            color="inherit" 
+            sx={{ fontSize: "0.875rem", fontWeight: 500 }}
+          >
             Home
           </MuiLink>
-          <MuiLink href="/build-resume" underline="none" color="inherit" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
-            Build Resume
-          </MuiLink>
+          {user.userType === "Job Seeker" && (
+            <MuiLink 
+              component={RouterLink} 
+              to="/resume-builder" 
+              underline="none" 
+              color="inherit" 
+              sx={{ fontSize: "0.875rem", fontWeight: 500 }}
+            >
+              Build Resume
+            </MuiLink>
+          )}
         </Box>
       </Box>
 
@@ -77,22 +96,30 @@ export default function HomeNavbar() {
           transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         >
           <MenuItem onClick={() => { navigate("/profile"); handleMenuClose(); }}>Profile</MenuItem>
-          <MenuItem onClick={() => { navigate("/job-applications"); handleMenuClose(); }}>My Applications</MenuItem>
-          <MenuItem onClick={() => { navigate("/saved-jobs"); handleMenuClose(); }}>Saved Jobs</MenuItem>
+          {user.userType === "Job Seeker" && (
+            <>
+              <MenuItem onClick={() => { navigate("/job-applications"); handleMenuClose(); }}>My Applications</MenuItem>
+              <MenuItem onClick={() => { navigate("/saved-jobs"); handleMenuClose(); }}>Saved Jobs</MenuItem>
+              <MenuItem onClick={() => { navigate("/resume-builder"); handleMenuClose(); }}>Your Resume</MenuItem>
+            </>
+          )}
           <MenuItem onClick={() => { navigate("/settings"); handleMenuClose(); }}>Settings</MenuItem>
           <Divider />
-          <MenuItem onClick={handleLogout}>Log Out</MenuItem>
+          <MenuItem onClick={handleLogoutClick}>Log Out</MenuItem>
         </Menu>
 
         <Divider orientation="vertical" flexItem sx={{ height: 24, mx: 1 }} />
-        <MuiLink
-          href="/employer"
-          underline="none"
-          color="inherit"
-          sx={{ fontSize: "0.875rem", fontWeight: 500, display: { xs: "none", md: "block" } }}
-        >
-          Employer/ Post Job
-        </MuiLink>
+        {user.userType !== "Employer" && (
+          <MuiLink
+            component={RouterLink}
+            to="/employer"
+            underline="none"
+            color="inherit"
+            sx={{ fontSize: "0.875rem", fontWeight: 500, display: { xs: "none", md: "block" } }}
+          >
+            Employer/ Post Job
+          </MuiLink>
+        )}
       </Box>
     </Box>
   );

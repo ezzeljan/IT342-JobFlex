@@ -52,9 +52,6 @@ export default function EmployerNav() {
           <MuiLink href="/providerhome" underline="none" color="white" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
             Home
           </MuiLink>
-          <MuiLink href="/find-resume" underline="none" color="white" sx={{ fontSize: "0.875rem", fontWeight: 500 }}>
-            Find Resume
-          </MuiLink>
         </Box>
       </Box>
 
@@ -78,7 +75,6 @@ export default function EmployerNav() {
           transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         >
           <MenuItem onClick={() => { navigate("/profile"); handleMenuClose(); }}>Profile</MenuItem>
-          <MenuItem onClick={() => { navigate("/my-jobs"); handleMenuClose(); }}>My Jobs</MenuItem>
           <MenuItem onClick={() => { navigate("/settings"); handleMenuClose(); }}>Settings</MenuItem>
           <Divider />
           <MenuItem onClick={handleLogout}>Log Out</MenuItem>
